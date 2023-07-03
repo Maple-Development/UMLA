@@ -1,1 +1,43 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+
+body {
+  margin: 0;
+  background-color: #000000;
+  color: white;
+}
+
+.nav-bar {
+  height: 8vh;
+  width: 100%;
+  background-color: #000000;
+  border-bottom: 5px solid #131A59;
+  display: flex;
+  justify-content: space-between;
+}
+
+.control-bar {
+    height: 10vh;
+    width: 100%;
+    background-color: #000000;
+    position: fixed;
+    bottom: 0;
+    border-top: 5px solid #131A59;
+}
+
+.upload_icon {
+    margin-top: 2vh;
+    margin-left: 1vw;
+}
+
+.library {
+    margin-top: 2vh;
+    margin-left: 1vw;
+    display: flex;
+}
+
+.library_text {
+    margin-left: 1vw;
+    color: #FFF;
+    font-size: 1.5em;
+    font-family: Ubuntu;
+}
