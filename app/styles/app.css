@@ -1,4 +1,5 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
 body {
   margin: 0;
@@ -6,13 +7,24 @@ body {
   color: white;
 }
 
+#nav-move {
+  position: absolute;
+  top: 3px;
+  border-radius: 13px;
+  background: rgba(97, 109, 216, 0.45);
+  left: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
 .nav-bar {
-  height: 8vh;
+  height: 6vh;
   width: 100%;
   background-color: #000000;
   border-bottom: 5px solid #131A59;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex=start;
 }
 
 .control-bar {
@@ -24,20 +36,115 @@ body {
     border-top: 5px solid #131A59;
 }
 
-.upload_icon {
-    margin-top: 2vh;
+.upload_icon svg {
+    height: 3vh;
+    margin-top: 1.5vh;
     margin-left: 1vw;
 }
 
+.upload_icon svg g path {
+  transition: 1s;
+}
+
+
+.upload_icon:hover svg g path,
+.upload_icon:hover {
+  fill: #3dff5a;
+}
+
+.library_icon {
+    height: 2.5vh;
+    width: 2.5vh;
+    z-index: 2;
+}
+
+.library_icon svg path {
+  transition: 1s;
+}
+
+.album_icon {
+    height: 2.5vh;
+    width: 2.5vh;
+    z-index: 2;
+}
+
+.album_icon svg path {
+  transition: 1s;
+}
+
+.search_icon {
+    height: 2.5vh;
+    width: 2.5vh;
+    z-index: 2;
+}
+
+.search_icon svg g path {
+  transition: 1s;
+}
+
+.playlist_icon {
+    height: 2.5vh;
+    width: 2.5vh;
+    z-index: 2;
+}
+
+.playlist_icon svg g path {
+  transition: 1s;
+}
+
+/* Sliding animation instead
+.library_icon:hover svg path,
+.library_icon:hover {
+  fill: #3dff5a;
+}
+*/ 
+
 .library {
-    margin-top: 2vh;
-    margin-left: 1vw;
+    margin-top: 1vh;
+    margin-left: 1.5vw;
+    display: flex;
+    padding-top: 0.5vh;
+}
+
+.albums {
+    margin-top: 1vh;
+    margin-left: 1.5vw;
+    display: flex;
+    padding-top: 0.5vh;
+}
+
+.playlists {
+  margin-top: 1vh;
+  margin-left: 1.5vw;
+  display: flex;
+  padding-top: 0.5vh;
+}
+
+.nav_text {
+    margin-left: 0.5vw;
+    color: #FFF;
+    font-size: 3vh;
+    font-family: Ubuntu;
+    font-weight: 500;
+    line-height: 90%;
+    z-index: 2;
+}
+
+.search {
+    margin-top: 1.5vh;
+    margin-left: 1.5vw;
     display: flex;
 }
 
-.library_text {
-    margin-left: 1vw;
-    color: #FFF;
-    font-size: 1.5em;
-    font-family: Ubuntu;
+.profile {
+  margin-left: auto;
+  margin-right: 1vw;
+}
+
+.profile img {
+  height: 4vh;
+  width: 4vh;
+  margin-top: 0.8vh;
+  border: 2px solid #613dff;
+  border-radius: 50%;
 }
