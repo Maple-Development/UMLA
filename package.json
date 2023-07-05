@@ -53,6 +53,7 @@
     "ember-resolver": "^10.1.0",
     "ember-source": "~5.0.0",
     "ember-template-lint": "^5.10.1",
+    "ember-truth-helpers": "^3.1.1",
     "ember-welcome-page": "^7.0.2",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
