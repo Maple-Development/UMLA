@@ -29,7 +29,7 @@ body {
 }
 
 .control-bar {
-  height: 10vh;
+  height: 6vh;
   width: 100%;
   background-color: #000;
   position: fixed;
@@ -128,6 +128,7 @@ body {
   font-weight: 500;
   line-height: 90%;
   z-index: 2;
+  text-decoration: none;
 }
 
 .search {
@@ -154,4 +155,69 @@ body {
   width: 40%;
   margin-right: auto;
   margin-left: auto;
+}
+
+.outer-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1vw;
+}
+
+.outer-card .img_container img {
+  margin-top: 3vh;
+  margin-left: 3vh;
+  margin-right: 3vh;
+}
+
+.card_vert {
+  display: flex;
+  flex-direction: column;
+}
+
+.song_title {
+  font-family: Ubuntu;
+  font-size: 2vh;
+  margin-left: 3vh;
+  text-align: left;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+}
+
+.song_artist {
+  font-family: Ubuntu;
+  margin-left: 3vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+  text-align: left;
+  color: #4F5BC6;
+  font-size: 1.5vh;
+}
+
+.img_container {
+  position: relative;
+}
+
+.play_hover {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8vh;
+  opacity: 0;
+  transform: translate(-50%, -40%);
+  transition: visibility 0s, opacity 0.2s linear;
+}
+
+.album_art:hover + .play_hover {
+  visibility: visible;
+  opacity: 1;
+  fill: rgb(255, 37, 37);
+  transition: fill 200ms linear;
+}
+
+.play_hover:hover {
+  visibility: visible;
+  fill: #613dff;
+  opacity: 1;
+  transition: fill 200ms linear;
 }

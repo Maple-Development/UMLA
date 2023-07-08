@@ -80,7 +80,7 @@
 
     const rect = e.target.getBoundingClientRect();
 
-    document.getElementById("nav-move").style.width = rect.width - -35 + "px";
+    document.getElementById("nav-move").style.width = rect.width - -45 + "px";
     document.getElementById("nav-move").style.height = rect.height + 4 + "px";
 
     requestAnimationFrame(() => {
@@ -94,7 +94,7 @@
       document.getElementById("nav-move").style.transition = `0.2s`;
     }
 
-    document.getElementById("nav-move").style.left = `${rect.x - 35 + 5}px`;
+    document.getElementById("nav-move").style.left = `${rect.x - 45 + 5}px`;
 
     hovered = true;
   };
