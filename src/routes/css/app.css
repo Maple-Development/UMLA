@@ -1,0 +1,224 @@
+/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
+
+body {
+  margin: 0;
+  background-color: #000;
+  color: white;
+  text-align: center;
+}
+
+#nav-move {
+  position: absolute;
+  top: 3px;
+  border-radius: 13px;
+  background: rgb(97 109 216 / 45%);
+  left: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.nav-bar {
+  height: 6vh;
+  width: 100%;
+  background-color: #000;
+  border-bottom: 5px solid #131a59;
+  display: flex;
+  justify-content: flex=start;
+}
+
+.control-bar {
+  height: 6vh;
+  width: 100%;
+  background-color: #000;
+  position: fixed;
+  bottom: 0;
+  border-top: 5px solid #131a59;
+  display: flex;
+}
+
+.upload_icon svg {
+  height: 3vh;
+  margin-top: 1.5vh;
+  margin-left: 1vw;
+}
+
+.upload_icon svg g path {
+  transition: 1s;
+}
+
+.upload_icon:hover svg g path,
+.upload_icon:hover {
+  fill: #3dff5a;
+}
+
+.library_icon {
+  height: 2.5vh;
+  width: 2.5vh;
+  z-index: 2;
+}
+
+.library_icon svg path {
+  transition: 1s;
+}
+
+.album_icon {
+  height: 2.5vh;
+  width: 2.5vh;
+  z-index: 2;
+}
+
+.album_icon svg path {
+  transition: 1s;
+}
+
+.search_icon {
+  height: 2.5vh;
+  width: 2.5vh;
+  z-index: 2;
+}
+
+.search_icon svg g path {
+  transition: 1s;
+}
+
+.playlist_icon {
+  height: 2.5vh;
+  width: 2.5vh;
+  z-index: 2;
+}
+
+.playlist_icon svg g path {
+  transition: 1s;
+}
+
+/* Sliding animation instead
+.library_icon:hover svg path,
+.library_icon:hover {
+  fill: #3dff5a;
+}
+*/
+
+.library {
+  margin-top: 1vh;
+  margin-left: 1.5vw;
+  display: flex;
+  padding-top: 0.5vh;
+}
+
+.albums {
+  margin-top: 1vh;
+  margin-left: 1.5vw;
+  display: flex;
+  padding-top: 0.5vh;
+}
+
+.playlists {
+  margin-top: 1vh;
+  margin-left: 1.5vw;
+  display: flex;
+  padding-top: 0.5vh;
+}
+
+.nav_text {
+  margin-left: 0.5vw;
+  color: #fff;
+  font-size: 3vh;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: 90%;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.search {
+  margin-top: 1.5vh;
+  margin-left: 1.5vw;
+  display: flex;
+}
+
+.profile {
+  margin-left: auto;
+  margin-right: 1vw;
+}
+
+.profile img {
+  height: 4vh;
+  width: 4vh;
+  margin-top: 0.8vh;
+  border: 2px solid #613dff;
+  border-radius: 50%;
+}
+
+.changelog {
+  border: 3px solid #613dff;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.outer-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1vw;
+}
+
+.outer-card .img_container img {
+  margin-top: 3vh;
+  margin-left: 3vh;
+  margin-right: 3vh;
+}
+
+.card_vert {
+  display: flex;
+  flex-direction: column;
+}
+
+.song_title {
+  font-family: Ubuntu;
+  font-size: 2vh;
+  margin-left: 3vh;
+  text-align: left;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+}
+
+.song_artist {
+  font-family: Ubuntu;
+  margin-left: 3vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+  text-align: left;
+  color: #4F5BC6;
+  font-size: 1.5vh;
+}
+
+.img_container {
+  position: relative;
+}
+
+.play_hover {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8vh;
+  opacity: 0;
+  transform: translate(-50%, -40%);
+  transition: visibility 0s, opacity 0.2s linear;
+}
+
+.album_art:hover + .play_hover {
+  visibility: visible;
+  opacity: 1;
+  fill: rgb(255, 37, 37);
+  transition: fill 200ms linear;
+}
+
+.play_hover:hover {
+  visibility: visible;
+  fill: #613dff;
+  opacity: 1;
+  transition: fill 200ms linear;
+}

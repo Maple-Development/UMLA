@@ -1,0 +1,67 @@
+.control_container {
+    margin-top: 2vh;
+    display: flex;
+}
+
+.back_button svg {
+    height: 2.5vh;
+    width: 2vh;
+    z-index: 2;
+    margin-left: 1vw;
+}
+
+.back_button:hover svg path,
+.back_button:hover {
+  fill: #8361ff;
+}
+
+.pause_button svg {
+    height: 2.5vh;
+    width: 2vh;
+    z-index: 2;
+    margin-left: 1vw;
+}
+
+.pause_button:hover svg path,
+.pause_button:hover {
+  fill: #8361ff;
+}
+
+.forward_button svg {
+    height: 2.5vh;
+    width: 2vh;
+    z-index: 2;
+    margin-left: 1vw;
+}
+
+.forward_button:hover svg g path,
+.forward_button:hover {
+  fill: #8361ff;
+}
+
+.shuffle_button svg {
+    height: 2vh;
+    width: 1.5vh;
+    z-index: 2;
+    margin-left: 1vw;
+    margin-top: 0.3vh;
+}
+
+.shuffle_button:hover svg g path,
+.shuffle_button:hover {
+  fill: #8361ff;
+}
+
+.loop_button svg {
+    height: 2vh;
+    width: 1.5vh;
+    z-index: 2;
+    margin-left: 1vw;
+    margin-top: 0.3vh;
+}
+
+.loop_button:hover svg g path,
+.loop_button:hover {
+  fill: #8361ff;
+}
+
