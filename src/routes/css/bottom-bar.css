@@ -17,7 +17,7 @@
 
 .pause_button svg {
     height: 2.5vh;
-    width: 2vh;
+    width: 3vh;
     z-index: 2;
     margin-left: 1vw;
 }
@@ -65,3 +65,57 @@
   fill: #8361ff;
 }
 
+
+
+/* Middle Part */
+
+.song_info {
+    display: flex;
+}
+
+.song_md {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vh;
+  margin-left: 0.5vw;
+}
+
+.album_photo {
+    height: 5vh;
+    width: 5vh;
+    margin-left: 2vw;
+    margin-top: 0.6vh;
+}
+
+.song_title_vert {
+  font-family: Ubuntu;
+  font-size: 2vh;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.song_artist_vert {
+  font-family: Ubuntu;
+  margin-bottom: 0;
+  text-align: left;
+  color: #4F5BC6;
+  font-size: 1.5vh;
+}
+
+/* Right Part */
+
+.volume_container {
+    display: flex;
+    margin-right: 1vw;
+}
+
+.volume_button svg {
+    height: 4vh;
+    width: 3vh;
+    z-index: 2;
+    margin-top: 1vh;
+}
+
+.volume_slider {
+    margin-left: 1vw;
+}
