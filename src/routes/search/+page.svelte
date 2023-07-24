@@ -10,7 +10,7 @@
     <div class="outer-card">
         {#each $songs as song}
             {#if song.title.toLowerCase().includes(searchQuery.toLowerCase())}
-                <LargeSongCard title={song.title} artist={song.artist} albumArt={song.albumArt} />
+                <LargeSongCard title={song.title} artist={song.artist} albumArt={song.albumArt} type="song" />
             {/if}
         {/each}
     -->
@@ -19,7 +19,7 @@
     <div class="outer-card">
         {#each $artists as artist}
             {#if artist.name.toLowerCase().includes(searchQuery.toLowerCase())}
-                <LargeSongCard title={artist.name} artist={artist.name} albumArt={artist.albumArt} />
+                <LargeSongCard title={artist.name} artist={artist.name} albumArt={artist.albumArt} type="artist" />
             {/if}
         {/each}
     -->
@@ -28,7 +28,7 @@
     <div class="outer-card">
         {#each $albums as album}
             {#if album.title.toLowerCase().includes(searchQuery.toLowerCase())}
-                <LargeSongCard title={album.title} artist={album.artist} albumArt={album.albumArt} />
+                <LargeSongCard title={album.title} artist={album.artist} albumArt={album.albumArt} type="album" />
             {/if}
         {/each}
     -->

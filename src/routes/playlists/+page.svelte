@@ -28,17 +28,17 @@
         </div>
       <h1 class="song_title">Create New Playlist</h1>
     </div>
-    <LargeSongCard title="real" artist="fake" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="real" artist="fake" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="real" artist="fake" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="real" artist="fake" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
+    <LargeSongCard title="Playlist #1" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
+    <LargeSongCard title="Songs I love!!" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
+    <LargeSongCard title="Playlist #133" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
+    <LargeSongCard title="Whatev" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
 
 
 
     <!--
 {#if $playlists}
     {#each $playlists as playlist}
-        <LargeSongCard title={playlist.title} artist={playlist.artist} albumArt={playlist.albumArt} />
+        <LargeSongCard title={playlist.title} artist="" albumArt={playlist.albumArt} type="playlist" />
     {/each}
 {/if}
 -->

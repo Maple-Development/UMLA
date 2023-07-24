@@ -26,7 +26,7 @@
 <div class="outer-card">
     {#if $songs}
         {#each $songs as song}
-            <LargeSongCard title={song.title} artist={song.artist} albumArt={song.albumArt} />
+            <LargeSongCard title={song.title} artist={song.artist} albumArt={song.albumArt} type="song" />
         {/each}
     {/if}
     <!--
