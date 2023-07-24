@@ -2,7 +2,7 @@ import Dexie from "dexie";
 
 export const db = new Dexie("songMetadata");
 db.version(4).stores({
-  songMd: "++id, title, artist, albumArt"
+  songMd: "++id, title, artist, albumArt, album"
 });
 
 db.on("populate", () => {
@@ -10,12 +10,200 @@ db.on("populate", () => {
     {
       title: "Just What I Need",
       artist: "The Cars",
-      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png"
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
     },
     {
       title: "Just What I Need",
       artist: "The Cars2",
-      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png"
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
+    },
+    {
+      title: "Just What I Need",
+      artist: "The Cars",
+      albumArt: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png",
+      album: "The Cars"
     }
   ]);
 });
