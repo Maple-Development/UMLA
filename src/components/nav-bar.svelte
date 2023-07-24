@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
-  
+  import UploadModal from './upload-modal.svelte';
+
+  let modal = false;
   onMount(() => {
     let hovered = false;
    
@@ -50,10 +52,15 @@
        btn.onmouseleave = noHover;
         });
   });
+
+  function openModal() {
+    modal = true;
+  }
    </script>
 
 <div class="nav-bar">
-    <div class="upload_icon">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="upload_icon" on:click={openModal} role="button" tabindex="0">
            <svg viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg%22%3E">
            <rect width="27" height="29" fill="#1E1E1E"/>
            <g id="MacBook Pro 14&#34; - 1" clip-path="url(#clip0_0_1)">
@@ -67,7 +74,9 @@
            </defs>
            </svg>
     </div>
- 
+    {#if modal === true}
+      <UploadModal />
+    {/if}
     <div class="library">
          <div class="library_icon">
              <svg viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -211,6 +211,14 @@ body {
   fill: rgb(255, 37, 37);
 }
 
+.album_art {
+  height: 200px;
+  width: 200px;
+  margin-top: 3vh;
+  margin-left: 3vh;
+  margin-right: 3vh;
+}
+
 .album_art:hover + .play_hover {
   visibility: visible;
   opacity: 1;
