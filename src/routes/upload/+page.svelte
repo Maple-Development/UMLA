@@ -34,15 +34,23 @@
                         } else {
                             imageStr = "/assets/album_art_placeholder.png";
                         }
+                        if (tags.title == undefined) {
+                            tags.title = file.name;
+                        }
                         db.songMd.add({
                             title: tags.title,
                             artist: tags.artist,
                             albumArt: imageStr,
                             album: tags.album
                         });
-                        db.songData.add({
-                            songData: file
-                        })
+
+                        const reader = new FileReader();
+                        reader.onload = function() {
+                            const str = this.result;
+                            db.songData.add({
+                                songData: str
+                            });
+                        };
                     },
                     onError: function(error) {
                         console.log(error);
