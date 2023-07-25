@@ -1,63 +1,114 @@
 <script>
-    import Dexie from "dexie";
-    import { db } from "../library/db.js";
     import { onMount } from 'svelte';
-    import { liveQuery } from 'dexie';
     import { loadScript } from './document.js';
-    
+    import {
+        fileOpen,
+        directoryOpen,
+        fileSave,
+        supported,
+    } from 'browser-fs-access';
+    import { get, set } from 'idb-keyval';
     onMount(async () => {
       await loadScript('/libraries/jsmediatags.min.js');
       console.log('script loaded successfully!');
     });
 
-    let files;
 
-    $: if (files) {
-        addSong();
-    }
 
     async function addSong() {
-        for (const file of files) {
-            jsmediatags.read(file, {
-                    onSuccess: function(tag) {
-                        var tags = tag.tags;
-                        let picture = tags.picture;
-                        let imageStr = undefined;
-                        if (picture) {
-                            let base64String = "";
-                            for (let i = 0; i < picture.data.length; i++) {
-                                base64String += String.fromCharCode(picture.data[i]);
-                            }
-                        let base64 = "data:" + picture.format + ";base64," +
-                            window.btoa(base64String);
-                            imageStr = base64;
-                        } else {
-                            imageStr = "/assets/album_art_placeholder.png";
-                        }
-                        if (tags.title == undefined) {
-                            tags.title = file.name;
-                        }
-                        db.songMd.add({
-                            title: tags.title,
-                            artist: tags.artist,
-                            albumArt: imageStr,
-                            album: tags.album
-                        });
+  const blobsInDirectory = await directoryOpen({
+    recursive: true,
+  });
 
-                        const reader = new FileReader();
-                        reader.onload = function() {
-                            const str = this.result;
-                            db.songData.add({
-                                songData: str
-                            });
-                        };
-                    },
-                    onError: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
-    }
+  const audioFiles = blobsInDirectory.filter((blob) => {
+    const fileName = blob.name.toLowerCase();
+    return (
+      fileName.endsWith(".mp3") ||
+      fileName.endsWith(".wav") ||
+      fileName.endsWith(".flac") ||
+      fileName.endsWith(".ogg") ||
+      fileName.endsWith(".m4a")
+    );
+  });
+
+  const updatedJson = { "songMd": [] };
+  const fileHandleOrUndefined = await get('file');
+  let d;
+  if (fileHandleOrUndefined) {
+    d = fileHandleOrUndefined;
+  }
+  else {
+    d = await window.showDirectoryPicker();
+    await set('file', d);
+  }
+
+  await Promise.all(
+    audioFiles.map(async (blob) => {
+      const file = blob;
+      const tags = await new Promise((resolve, reject) => {
+        window.jsmediatags.read(file, {
+          onSuccess: resolve,
+          onError: reject,
+        });
+      });
+
+      let picture = tags.tags.picture;
+      let str = undefined;
+
+      if (picture) {
+        let base64String = "";
+        for (let i = 0; i < picture.data.length; i++) {
+          base64String += String.fromCharCode(picture.data[i]);
+        }
+        let base64 = "data:" + picture.format + ";base64," + window.btoa(base64String);
+
+        str = base64;
+      } else {
+        str = "/assets/album_art_placeholder.png";
+      }
+      await createDataFolder(d);
+      saveSongPhoto(str, tags.tags.title, updatedJson.songMd.length + 1, d);
+      const songMd = {
+        id: updatedJson.songMd.length + 1,
+        title: tags.tags.title || "Unknown",
+        artist: tags.tags.artist || "Unknown",
+        album: tags.tags.album || "Unknown",
+      };
+
+      updatedJson.songMd.push(songMd);
+    })
+  );
+  
+  saveSongMd(updatedJson, d);
+
+}
+
+async function createDataFolder(handle) {
+  const d = handle;
+  const dataFolder = await d.getDirectoryHandle("umla.data", { create: true });
+  return dataFolder;
+}
+
+async function saveSongPhoto(photo, title, count, handle) {
+  title = count;
+  const d = await handle.getDirectoryHandle("umla.data");
+  let fileTitle = title + ".umla";
+  const cm = await d.getFileHandle(fileTitle, { create: true });
+  const cmf = await cm.createWritable();
+  await cmf.write(photo);
+  await cmf.close();
+}
+
+  async function saveSongMd(updatedJson, handle) {
+    const jsonData = JSON.stringify(updatedJson, null, 2);
+    const fileBlob = new Blob([jsonData], { type: 'application/json' });
+    const saveFileName = "songMd.json";
+    const d = await handle.getDirectoryHandle("umla.data");
+    const fileHandle = await d.getFileHandle(saveFileName, { create: true });
+    const writable = await fileHandle.createWritable();
+    await writable.write(fileBlob);
+    await writable.close();
+}
 </script>
 
-<input type="file" bind:files multiple />
+<button on:click={addSong}> Upload Songs! </button>
