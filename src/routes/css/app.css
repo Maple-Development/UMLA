@@ -67,6 +67,21 @@ body {
   fill: #3dff5a;
 }
 
+.refresh_icon svg {
+  height: 3vh;
+  margin-top: 1.3vh;
+  margin-right: 0.5vw;
+}
+
+.refresh_icon svg g path {
+  transition: 1s;
+}
+
+.refresh_icon:hover svg g path,
+.refresh_icon:hover {
+  fill: #3dff5a;
+}
+
 .library_icon {
   height: 2.5vh;
   width: 2.5vh;
@@ -155,6 +170,7 @@ body {
 .profile {
   margin-left: auto;
   margin-right: 1vw;
+  display: flex;
 }
 
 .profile img {

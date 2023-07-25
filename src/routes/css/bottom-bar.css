@@ -76,7 +76,7 @@
 .song_md {
   display: flex;
   flex-direction: column;
-  margin-top: 1vh;
+  margin-top: 0vh;
   margin-left: 0.5vw;
 }
 
@@ -84,7 +84,7 @@
     height: 5vh;
     width: 5vh;
     margin-left: 2vw;
-    margin-top: 0.6vh;
+    margin-top: 0.3vh;
 }
 
 .song_title_vert {
@@ -118,4 +118,5 @@
 
 .volume_slider {
     margin-left: 1vw;
+    width: 10vw;
 }
