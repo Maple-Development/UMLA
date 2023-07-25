@@ -1,6 +1,19 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 3px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #6200ff;
+  border-radius: 4px;
+}
 body {
   margin: 0;
   background-color: #000;
@@ -183,6 +196,8 @@ body {
   text-align: left;
   margin-top: 0.5vh;
   margin-bottom: 0;
+  text-overflow: ellipsis;
+  width: 200px;
 }
 
 .song_artist {
@@ -193,6 +208,8 @@ body {
   text-align: left;
   color: #4F5BC6;
   font-size: 1.5vh;
+  text-overflow: ellipsis;
+  width: 200px;
 }
 
 .img_container {

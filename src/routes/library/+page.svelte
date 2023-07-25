@@ -3,7 +3,7 @@
     import { db } from "./db.js";
     import { liveQuery } from 'dexie';
 
-    $: songs = liveQuery(() => db.songMd.limit(25).toArray());
+    $: songs = liveQuery(() => db.songMd.toArray());
 
     /*
     let title = "Untitled";

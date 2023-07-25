@@ -1,9 +1,9 @@
 <script>
     import LargeSongCard from "../../components/large-song-card.svelte";
-    import { db } from "./db.js";
+    import { db } from "../library/db.js";
     import { liveQuery } from 'dexie';
 
-    $: playlist = liveQuery(() => db.playlist.toArray());
+    $: playlists = liveQuery(() => db.playlist.toArray());
 </script>
 
 <h1 class="title"> Playlists </h1>
@@ -28,20 +28,14 @@
         </div>
       <h1 class="song_title">Create New Playlist</h1>
     </div>
-    <LargeSongCard title="Playlist #1" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="Songs I love!!" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="Playlist #133" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
-    <LargeSongCard title="Whatev" artist="" albumArt="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/The_Cars_-_The_Cars.png/220px-The_Cars_-_The_Cars.png" />
 
 
-
-    <!--
 {#if $playlists}
     {#each $playlists as playlist}
-        <LargeSongCard title={playlist.title} artist="" albumArt={playlist.albumArt} type="playlist" />
+        <LargeSongCard title={playlist.title} artist="" albumArt={playlist.playlistArt} type="playlist" />
     {/each}
 {/if}
--->
+
 </div>
 <style>
     .title {

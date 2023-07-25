@@ -11,5 +11,5 @@
 
 <NavBar />
 <slot></slot>
+<br><br><br><br>
 <ControlBar />
-
