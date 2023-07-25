@@ -13,8 +13,10 @@
       console.log('script loaded successfully!');
     });
 
-
-
+  let progressBarLength = 0;
+  let current = 0;
+  let progressBar2Length = 0;
+  let current2 = 0;
     async function addSong() {
   const blobsInDirectory = await directoryOpen({
     recursive: true,
@@ -41,7 +43,8 @@
     d = await window.showDirectoryPicker();
     await set('file', d);
   }
-
+  progressBarLength = audioFiles.length;
+  progressBar2Length = audioFiles.length;
   await Promise.all(
     audioFiles.map(async (blob) => {
       const file = blob;
@@ -51,7 +54,7 @@
           onError: reject,
         });
       });
-
+      current++;
       let picture = tags.tags.picture;
       let str = undefined;
 
@@ -90,6 +93,7 @@ async function createDataFolder(handle) {
 }
 
 async function saveSongPhoto(photo, title, count, handle) {
+  current2++;
   title = count;
   const d = await handle.getDirectoryHandle("umla.data");
   let fileTitle = title + ".umla";
@@ -108,7 +112,17 @@ async function saveSongPhoto(photo, title, count, handle) {
     const writable = await fileHandle.createWritable();
     await writable.write(fileBlob);
     await writable.close();
+    let element = document.getElementById("progressFinal");
+    element.innerHTML = "Done!";
 }
 </script>
 
 <button on:click={addSong}> Upload Songs! </button>
+<h1> {current} / {progressBarLength} </h1>
+<p> Processing files... </p>
+<progress value={current} max={progressBarLength}></progress>
+<br>
+<h1> {current2} / {progressBar2Length} </h1>
+<p> Saving files... </p>
+<progress value={current2} max={progressBar2Length}></progress>
+<p id="progressFinal"></p>
