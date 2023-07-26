@@ -13,6 +13,9 @@
       console.log('script loaded successfully!');
     });
 
+    let uploadShow = false;
+    let working = true;
+    let working2 = false;
   let progressBarLength = 0;
   let current = 0;
   let progressBar2Length = 0;
@@ -45,6 +48,7 @@
   }
   progressBarLength = audioFiles.length;
   progressBar2Length = audioFiles.length;
+  working2 = true;
   await Promise.all(
     audioFiles.map(async (blob) => {
       const file = blob;
@@ -76,6 +80,7 @@
         title: tags.tags.title || "Unknown",
         artist: tags.tags.artist || "Unknown",
         album: tags.tags.album || "Unknown",
+        track: tags.tags.track || "0",
       };
 
       updatedJson.songMd.push(songMd);
@@ -112,17 +117,95 @@ async function saveSongPhoto(photo, title, count, handle) {
     const writable = await fileHandle.createWritable();
     await writable.write(fileBlob);
     await writable.close();
-    let element = document.getElementById("progressFinal");
-    element.innerHTML = "Done!";
+    working2 = false;
+    working = false;
 }
 </script>
 
-<button on:click={addSong}> Upload Songs! </button>
-<h1> {current} / {progressBarLength} </h1>
-<p> Processing files... </p>
-<progress value={current} max={progressBarLength}></progress>
-<br>
-<h1> {current2} / {progressBar2Length} </h1>
-<p> Saving files... </p>
-<progress value={current2} max={progressBar2Length}></progress>
-<p id="progressFinal"></p>
+{#if uploadShow == true}
+
+<div class="welcome">
+  {#if working == true}
+  <button on:click={addSong}> Upload Songs! </button>
+  <div class="flex">
+    <div>
+      <h1> {current} / {progressBarLength} </h1>
+      <p> Processing files... </p>
+      <progress value={current} max={progressBarLength}></progress>
+    </div>
+    <br>
+    <div>
+      <h1> {current2} / {progressBar2Length} </h1>
+      <p> Saving files... </p>
+      <progress value={current2} max={progressBar2Length}></progress>
+    </div>
+  </div>
+  {#if working2 == false && working == true}
+  <h1>Waiting on Upload...</h1>
+  <p> Press the Upload Songs button, and select your music folder. </p>
+  {:else if working2 == true && working == true}
+  <h1>Please Wait...</h1>
+  <p> This may take a while depending on the size of your library. </p>
+  {/if}
+  {:else if working == false}
+  <h1>Upload Complete!</h1>
+  <p> Checkout your library! </p>
+  <button on:click={() => window.location.href = '/library'}> Go to Library </button>
+  {/if}
+</div>
+
+  {:else}
+  <div class="welcome">
+    <h1> Welcome to UMLA! </h1>
+    <p> To get started, click the button below to upload your music library! </p>
+    <button on:click={() => uploadShow = true}> Upload Songs! </button>
+  </div>
+{/if}
+
+
+<style>
+    .welcome {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+    }
+
+    .welcome h1 {
+        font-family: Ubuntu;
+        font-size: 50px;
+        color: #81F0FF;
+        margin-bottom: 0;
+    }
+
+    .welcome p {
+        font-size: 20px;
+        color: white;
+        margin-top: 5px;
+    }
+
+    .welcome button {
+        width: 200px;
+        height: 50px;
+        border-radius: 54px;
+        background: #1A1B23;
+        margin-top: 25px;
+        color: white;
+        border: none;
+        text-align: center;
+    }
+
+    .welcome button:hover {
+        cursor: pointer;
+    }
+
+    .welcome button:focus {
+        outline: none;
+    }
+
+    .flex div {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+</style>
