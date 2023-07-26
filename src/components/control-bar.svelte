@@ -1,3 +1,7 @@
+<script>
+      import { currentlyPlaying } from '$lib/store.js';
+</script>
+
 <div class="control-bar">
     <div class="control_container">
         <div class="back_button">
@@ -45,13 +49,15 @@
         </div>
     </div>
 
+    {#if $currentlyPlaying != null}
     <div class="song_info">
-        <img class="album_photo" src="/assets/album_art_placeholder.png" alt="album art">
+        <img class="album_photo" src="{$currentlyPlaying.albumArt}" alt="album art">
         <div class="song_md">
-        <div class="song_title_vert">Just What I Needed</div>
-        <div class="song_artist_vert">The Cars</div>
+        <div class="song_title_vert">{$currentlyPlaying.title}</div>
+        <div class="song_artist_vert">{$currentlyPlaying.artist}</div>
         </div>
     </div>
+    {/if}
 
     <div class="volume_container">
         <div class="volume_button">

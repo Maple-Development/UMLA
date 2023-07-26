@@ -1,25 +1,27 @@
 <script>
     import LargeSongCard from "../../components/large-song-card.svelte";
-    import { songs } from "$lib/store.js"
+    import { songs } from "$lib/store.js";
     import { get, set } from 'idb-keyval';
+    import { handle } from "$lib/store.js";
 
     async function showLibrary() {
-        let handle;
+        let handles;
         const fileHandleOrUndefined = await get('file');
         if (fileHandleOrUndefined) {
-            handle = fileHandleOrUndefined;
+            handles = fileHandleOrUndefined;
         }
         else {
-            handle = await window.showDirectoryPicker();
+            handles = await window.showDirectoryPicker();
             await set('file', d);
         }
-        await verifyPermission(handle);
-        const d = await handle.getDirectoryHandle("umla.data");
+        handle.set(handles);
+        await verifyPermission(handles);
+        const d = await handles.getDirectoryHandle("umla.data");
         const metadata = await d.getFileHandle("songMd.json");
         const file = await metadata.getFile();
         const contents = await file.text();
         const json = JSON.parse(contents);
-        let songData = await getSongImages(handle, json.songMd);
+        let songData = await getSongImages(handles, json.songMd);
         songs.set(songData);
     }
 
@@ -58,7 +60,7 @@
 <div class="outer-card">
     {#if $songs && $songs.length > 0}
         {#each $songs as song}
-            <LargeSongCard title={song.title} artist={song.artist} albumArt={song.albumArt} type="song" />
+            <LargeSongCard fileName={song.fileName} title={song.title} artist={song.artist} albumArt={song.albumArt} type="song" />
         {/each}
 
         {:else}

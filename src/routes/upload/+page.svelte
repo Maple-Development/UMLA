@@ -81,6 +81,7 @@
         artist: tags.tags.artist || "Unknown",
         album: tags.tags.album || "Unknown",
         track: tags.tags.track || "0",
+        fileName: file.name,
       };
 
       updatedJson.songMd.push(songMd);
