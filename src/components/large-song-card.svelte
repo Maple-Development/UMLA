@@ -3,6 +3,7 @@
     import { handle } from "$lib/store.js";
     import { songs } from '$lib/store.js'
     import { currentlyPlaying } from '$lib/store.js'
+    import { libLocation } from '$lib/store.js'
   import { set } from "idb-keyval";
     export let title;
     export let artist;
@@ -10,11 +11,25 @@
     export let type;
     export let fileName;
 
+    $: location = $libLocation;
+
     if (type === undefined) {
         type = "song";
     }
 
-    async function handlePlay(fileName) {        
+    async function playExternalSong(fileName, location) {
+        const song = await fetch(location + "/" + fileName);
+        const file = await song.blob();
+        const url = URL.createObjectURL(file);
+        audio.set(url);
+        setCurrentlyPlaying(fileName);
+    }
+
+    async function handlePlay(fileName) {
+        if (location !== "local" && location !== undefined) {
+            playExternalSong(fileName, location);
+            return;
+        }
         const song = await $handle.getFileHandle(fileName);
         const file = await song.getFile();
         const url = URL.createObjectURL(file);

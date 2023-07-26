@@ -1,6 +1,10 @@
 <script>
     import { onMount } from 'svelte';
     import { loadScript } from './document.js';
+    import FakeCard from '../../components/fake-card.svelte';
+    import { libLocation } from '$lib/store.js';
+
+    $: location = $libLocation;
     import {
         fileOpen,
         directoryOpen,
@@ -123,54 +127,90 @@ async function saveSongPhoto(photo, title, count, handle) {
 }
 </script>
 
+{#if location == "local" || location == undefined}
 {#if uploadShow == true}
 
 <div class="welcome">
-  {#if working == true}
-  <button on:click={addSong}> Upload Songs! </button>
-  <div class="flex">
-    <div>
-      <h1> {current} / {progressBarLength} </h1>
-      <p> Processing files... </p>
-      <progress value={current} max={progressBarLength}></progress>
+  <div class="welcome2">
+    {#if working == true}
+    <button on:click={addSong}> Upload Songs! </button>
+    <div class="flex">
+      <div>
+        <h1> {current} / {progressBarLength} </h1>
+        <p> Processing files... </p>
+        <progress value={current} max={progressBarLength}></progress>
+      </div>
+      <br>
+      <div>
+        <h1> {current2} / {progressBar2Length} </h1>
+        <p> Saving files... </p>
+        <progress value={current2} max={progressBar2Length}></progress>
+      </div>
     </div>
-    <br>
-    <div>
-      <h1> {current2} / {progressBar2Length} </h1>
-      <p> Saving files... </p>
-      <progress value={current2} max={progressBar2Length}></progress>
-    </div>
+    {#if working2 == false && working == true}
+    <h1>Waiting on Upload...</h1>
+    <p> Press the Upload Songs button, and select your music folder. </p>
+    <button on:click={window.location.href = '/settings'}> Use External </button>
+    <p> Press the Use External button to set an external location to load songs from </p>
+    {:else if working2 == true && working == true}
+    <h1>Please Wait...</h1>
+    <p> This may take a while depending on the size of your library. </p>
+    {/if}
+    {:else if working == false}
+    <h1>Upload Complete!</h1>
+    <p> Checkout your library! </p>
+    <button on:click={() => window.location.href = '/library'}> Go to Library </button>
+    {/if}
   </div>
-  {#if working2 == false && working == true}
-  <h1>Waiting on Upload...</h1>
-  <p> Press the Upload Songs button, and select your music folder. </p>
-  {:else if working2 == true && working == true}
-  <h1>Please Wait...</h1>
-  <p> This may take a while depending on the size of your library. </p>
-  {/if}
-  {:else if working == false}
-  <h1>Upload Complete!</h1>
-  <p> Checkout your library! </p>
-  <button on:click={() => window.location.href = '/library'}> Go to Library </button>
-  {/if}
 </div>
 
   {:else}
   <div class="welcome">
-    <h1> Welcome to UMLA! </h1>
-    <p> To get started, click the button below to upload your music library! </p>
-    <button on:click={() => uploadShow = true}> Upload Songs! </button>
+    <div class="welcome2">
+      <h1> Welcome to UMLA! </h1>
+      <p> To get started, click the button below to upload your music library! </p>
+      <button on:click={() => uploadShow = true}> Upload Songs! </button>
+    </div>
   </div>
 {/if}
+{:else}
+<div class="welcome">
+  <div class="welcome2">
+    <h1> Welcome to UMLA! </h1>
+    <p> Your using an external location, so no need to upload anything! </p>
+    <button on:click={() => window.location.href = '/library'}> Go to Library </button>
+  </div>
+</div>
+{/if}
+<div class="blur">
+  <FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard />
+</div>
 
 
 <style>
     .welcome {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+
+    .blur {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 1vw;
+    }
+
+    .welcome2 {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 70vh;
+        background-color: #000;
+        padding: 20px;
+        border-radius: 20px;
+        border: 2px solid #81F0FF;
     }
 
     .welcome h1 {

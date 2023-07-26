@@ -1,10 +1,35 @@
 <script>
     import LargeSongCard from "../../components/large-song-card.svelte";
+    import FakeCard from "../../components/fake-card.svelte";
     import { songs } from "$lib/store.js";
     import { get, set } from 'idb-keyval';
     import { handle } from "$lib/store.js";
+    import { libLocation } from "$lib/store.js";
 
+    $: location = $libLocation;
+
+    async function loadExternalLibrary() {
+        const response = await fetch(location + "/umla.data/songMd.json");
+        const json = await response.json();
+        let songData = await getExternalSongImages(location, json.songMd);
+        songs.set(songData);
+    }
+
+    async function getExternalSongImages(location, json) {
+        const songs = json;
+        for (let i = 0; i < songs.length; i++) {
+            const song = songs[i];
+            const response = await fetch(location + "/umla.data/" + song.id + ".umla");
+            const albumArt = await response.text();
+            song.albumArt = albumArt;
+        }
+        return songs;
+    }
     async function showLibrary() {
+        if (location !== "local" && location !== undefined) {
+            loadExternalLibrary();
+            return;
+        }
         let handles;
         const fileHandleOrUndefined = await get('file');
         if (fileHandleOrUndefined) {
@@ -23,6 +48,7 @@
         const json = JSON.parse(contents);
         let songData = await getSongImages(handles, json.songMd);
         songs.set(songData);
+        console.log(location);
     }
 
     async function verifyPermission(fileHandle, readWrite) {
@@ -65,23 +91,43 @@
 
         {:else}
             <div class="welcome">
-                <h1>No songs found</h1>
-                <p>Click the button below to refresh your library</p>
-                <p class="small">Tip: You can click the refresh button in the top left at any time!</p>
-                <button on:click={showLibrary}>Refresh Library</button>
+                <div class="welcome2">
+                    <h1>Welcome!</h1>
+                    <p>Click the button below to refresh your library</p>
+                    <p class="small">Tip: You can click the refresh button in the top right at any time!</p>
+                    <button on:click={showLibrary}>Refresh Library</button>
+                </div>
             </div>
-    {/if}
+            <div class="blur">
+                <FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard />
+            </div>
+        {/if}
 </div>
     
 <style>
     .welcome {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+
+    .blur {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 1vw;
+    }
+
+    .welcome2 {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 70vh;
-        margin-left: auto;
-        margin-right: auto;
+        background-color: #000;
+        padding: 20px;
+        border-radius: 20px;
+        border: 2px solid #81F0FF;
     }
 
     .welcome h1 {

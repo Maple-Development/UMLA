@@ -1,5 +1,5 @@
 <script>
-  import { Tooltip, Button } from 'flowbite-svelte';
+  import { Tooltip, Button, Dropdown, DropdownItem, Chevron, Checkbox, ToolbarButton, MenuButton, DropdownDivider, Avatar } from 'flowbite-svelte';
   let type = 'dark';
   import { onMount } from 'svelte';
   onMount(() => {
@@ -131,9 +131,14 @@
         </g>
         </svg>
       </div>
-      <img src="/assets/pfp-placeholder.png" alt="Profile">
+      <Avatar class="acs" src="/assets/pfp-placeholder.png" />
+        <Dropdown triggeredBy=".acs">
+          <DropdownItem class="text-black"><a href="/settings">Settings</a></DropdownItem>
+        </Dropdown>
     </div>
     <div id="nav-move"></div>
     <Tooltip {type} triggeredBy="[id^='type-']" on:show={ev => type = ev.target.id.split('-')[1]}>Refresh Library</Tooltip>
  </div>
  
+ <style>
+ </style>
