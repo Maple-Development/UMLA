@@ -23,15 +23,15 @@
     const reset = () => {
         playlistStage1 = false;
         playlistStage2 = false;
-        console.log($songs);
     };
 
     function createPlaylist() {
         console.log(createSongs)
+        const ids = createSongs.map((song) => song.id);
         const playlist = {
             title: createTitle,
             playlistArt: createArt,
-            songs: createSongs
+            songs: ids,
         }
         playlists.update((p) => [...p, playlist]);
         console.log($playlists)
@@ -64,26 +64,25 @@
               </div>
       <h1 class="song_title">Create New Playlist</h1>
     </div>
-</div>
+
 
 
 {#if $playlists.length > 0}
-<div class="outer-card">
     {#each $playlists as playlist}
         <LargeSongCard fileName="" title={playlist.title} artist="" albumArt={playlist.playlistArt} type="playlist" />
     {/each}
-</div>
-{/if}
 
+{/if}
+</div>
 {:else if playlistStage1 == true && playlistStage2 == false}
 <div class="welcome">
     <div class="welcome2">
         <form on:submit={submit} on:reset={reset}>
             <Label class="space-y-2 flex justify-center flex-col items-center pb-3">
                 <span class="text-white text-xl">Title</span>
-                <Input bind:createTitle class="w-3/4" type="text" placeholder="Rollin'" size="md" />
+                <Input bind:value={createTitle} class="w-3/4" type="text" placeholder="Rollin'" size="md" />
                 <span class="text-white text-xl">Album Art</span>
-                <Input bind:createArt class="w-3/4" type="text" placeholder="https://media.architecturaldigest.com/photos/5890e88033bd1de9129eab0a/1:1/w_870,h_870,c_limit/Artist-Designed%20Album%20Covers%202.jpg" size="md" />
+                <Input bind:value={createArt} class="w-3/4" type="text" placeholder="https://media.architecturaldigest.com/photos/5890e88033bd1de9129eab0a/1:1/w_870,h_870,c_limit/Artist-Designed%20Album%20Covers%202.jpg" size="md" />
                 <p class="small">Note: this must be a link to an image</p>
             </Label>
             <Button type="submit">Submit</Button>
