@@ -1,13 +1,13 @@
 .control_container {
-    margin-top: 2vh;
-    display: flex;
+  margin-top: 2vh;
+  display: flex;
 }
 
 .back_button svg {
-    height: 2.5vh;
-    width: 2vh;
-    z-index: 2;
-    margin-left: 1vw;
+  height: 2.5vh;
+  width: 2vh;
+  z-index: 2;
+  margin-left: 1vw;
 }
 
 .back_button:hover svg path,
@@ -16,10 +16,10 @@
 }
 
 .pause_button svg {
-    height: 2.5vh;
-    width: 3vh;
-    z-index: 2;
-    margin-left: 1vw;
+  height: 2.5vh;
+  width: 3vh;
+  z-index: 2;
+  margin-left: 1vw;
 }
 
 .pause_button:hover svg path,
@@ -28,10 +28,10 @@
 }
 
 .forward_button svg {
-    height: 2.5vh;
-    width: 2vh;
-    z-index: 2;
-    margin-left: 1vw;
+  height: 2.5vh;
+  width: 2vh;
+  z-index: 2;
+  margin-left: 1vw;
 }
 
 .forward_button:hover svg g path,
@@ -40,11 +40,11 @@
 }
 
 .shuffle_button svg {
-    height: 2vh;
-    width: 1.5vh;
-    z-index: 2;
-    margin-left: 1vw;
-    margin-top: 0.3vh;
+  height: 2vh;
+  width: 1.5vh;
+  z-index: 2;
+  margin-left: 1vw;
+  margin-top: 0.3vh;
 }
 
 .shuffle_button:hover svg g path,
@@ -53,11 +53,11 @@
 }
 
 .loop_button svg {
-    height: 2vh;
-    width: 1.5vh;
-    z-index: 2;
-    margin-left: 1vw;
-    margin-top: 0.3vh;
+  height: 2vh;
+  width: 1.5vh;
+  z-index: 2;
+  margin-left: 1vw;
+  margin-top: 0.3vh;
 }
 
 .loop_button:hover svg g path,
@@ -65,12 +65,10 @@
   fill: #8361ff;
 }
 
-
-
 /* Middle Part */
 
 .song_info {
-    display: flex;
+  display: flex;
 }
 
 .song_md {
@@ -81,10 +79,10 @@
 }
 
 .album_photo {
-    height: 5vh;
-    width: 5vh;
-    margin-left: 2vw;
-    margin-top: 0.3vh;
+  height: 5vh;
+  width: 5vh;
+  margin-left: 2vw;
+  margin-top: 0.3vh;
 }
 
 .song_title_vert {
@@ -98,25 +96,25 @@
   font-family: Ubuntu;
   margin-bottom: 0;
   text-align: left;
-  color: #4F5BC6;
+  color: #4f5bc6;
   font-size: 1.5vh;
 }
 
 /* Right Part */
 
 .volume_container {
-    display: flex;
-    margin-right: 1vw;
+  display: flex;
+  margin-right: 1vw;
 }
 
 .volume_button svg {
-    height: 4vh;
-    width: 3vh;
-    z-index: 2;
-    margin-top: 1vh;
+  height: 4vh;
+  width: 3vh;
+  z-index: 2;
+  margin-top: 1vh;
 }
 
 .volume_slider {
-    margin-left: 1vw;
-    width: 10vw;
+  margin-left: 1vw;
+  width: 10vw;
 }
