@@ -3,6 +3,7 @@
     import { handle } from "$lib/store.js";
     import { songs } from '$lib/store.js'
     import { currentlyPlaying } from '$lib/store.js'
+    import { goto } from '$app/navigation';
     import { libLocation } from '$lib/store.js'
   import { set } from "idb-keyval";
     export let title;
@@ -47,7 +48,7 @@
 
     function handlePlaylist(title) {
         const url = "/playlist?playlist=" + title;
-        window.location.href = url;
+        goto(url);
     }
 </script>
 
