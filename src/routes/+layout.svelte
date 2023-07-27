@@ -104,6 +104,7 @@
     const json = await response.json();
     let songData = await getExternalSongImages(location, json.songMd);
     songs.set(songData);
+    await setAlbumSongs();
   }
 
   async function getExternalSongImages(location, json) {
