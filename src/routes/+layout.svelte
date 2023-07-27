@@ -37,6 +37,9 @@
       loadExternalLibrary();
       return;
     }
+    if (window.location.pathname === '/upload') {
+        return;
+    }
     modal = true;
   }
 
