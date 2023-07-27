@@ -33,6 +33,10 @@
         return;
       }
     }
+    if (location !== 'local' && location !== undefined) {
+      loadExternalLibrary();
+      return;
+    }
     modal = true;
   }
 
@@ -57,10 +61,6 @@
   }
 
   async function setLibrarySongs(handles) {
-    if (location !== 'local' && location !== undefined) {
-      loadExternalLibrary();
-      return;
-    }
     const d = await handles.getDirectoryHandle('umla.data');
     const metadata = await d.getFileHandle('songMd.json');
     const file = await metadata.getFile();
