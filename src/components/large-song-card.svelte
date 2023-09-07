@@ -5,12 +5,14 @@
   import { currentlyPlaying } from '$lib/store.js';
   import { goto } from '$app/navigation';
   import { libLocation } from '$lib/store.js';
+  import { index } from '$lib/store.js'
   import { set } from 'idb-keyval';
   export let title;
   export let artist;
   export let albumArt;
   export let type;
   export let fileName;
+  export let id;
 
   $: location = $libLocation;
 
@@ -18,26 +20,43 @@
     type = 'song';
   }
 
+  async function findSongIndexes(id) {
+    let minSong = 1;
+    let maxSong = $songs.length;
+    let lastSong = id - 1;
+    let nextSong = id + 1;
+
+    if (lastSong < minSong) {
+      lastSong = maxSong;
+    }
+    if (nextSong > maxSong) {
+      nextSong = minSong;
+    }
+    index.set(lastSong, nextSong);
+  }
+
   async function playExternalSong(fileName, location) {
     const song = await fetch(location + '/' + fileName);
     const file = await song.blob();
     const url = URL.createObjectURL(file);
     audio.set(url);
+    await findSongIndexes(id);
     setCurrentlyPlaying(fileName);
   }
 
-  async function handlePlay(fileName, title) {
+  async function handlePlay(fileName, title, id) {
     if (type == 'playlist') {
       handlePlaylist(title);
     }
     if (location !== 'local' && location !== undefined) {
-      playExternalSong(fileName, location);
+      playExternalSong(fileName, location, id);
       return;
     }
     const song = await $handle.getFileHandle(fileName);
     const file = await song.getFile();
     const url = URL.createObjectURL(file);
     audio.set(url);
+    await findSongIndexes(id);
     setCurrentlyPlaying(fileName);
   }
 
@@ -57,7 +76,7 @@
     <img class="album_art" src={albumArt} alt="album art" />
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <svg
-      on:click={handlePlay(fileName, title)}
+      on:click={handlePlay(fileName, title, id)}
       class="play_hover"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 -960 960 960"

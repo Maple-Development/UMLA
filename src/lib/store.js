@@ -5,6 +5,7 @@ export const songs = writable([]);
 export const albums = writable([]);
 export const audio = writable(null);
 export const handle = writable(null);
+export const index = writable([]);
 export const currentlyPlaying = writable(null);
 let libraryLocation = 'local';
 let playlists1 = [];

@@ -12,6 +12,7 @@
         artist={song.artist}
         albumArt={song.albumArt}
         type="song"
+        id={song.id}
       />
     {/each}
   {/if}

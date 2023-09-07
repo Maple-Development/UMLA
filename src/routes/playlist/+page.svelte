@@ -34,6 +34,8 @@
         artist={song.artist}
         albumArt={song.albumArt}
         fileName={song.fileName}
+        type="song"
+        id={song.id}
       />
     {/each}
   </div>
