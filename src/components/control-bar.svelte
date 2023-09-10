@@ -23,6 +23,10 @@
     let song = findSongById($index[2])
       if (song) {
         audioComponent.$destroy();
+        if (location !== 'local' && location !== undefined) {
+          playExternalSong(song.fileName, location, $index[2]);
+          return;
+        }
         playSong(song.fileName, $index[2]);
       }
   }
@@ -35,6 +39,10 @@
   function back() {
     let song = findSongById($index[1])
       if (song) {
+          if (location !== 'local' && location !== undefined) {
+            playExternalSong(song.fileName, location, $index[1]);
+            return;
+          }
         audioComponent.$destroy();
         playSong(song.fileName, $index[1]);
       }
@@ -121,6 +129,10 @@
         let song = findSongById($index[2])
         if (song) {
           audioComponent.$destroy();
+          if (location !== 'local' && location !== undefined) {
+            playExternalSong(song.fileName, location, $index[2]);
+            return;
+          }
           playSong(song.fileName, $index[2]);
         }
     }); 
