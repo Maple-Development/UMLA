@@ -12,6 +12,26 @@
   $: location = $libLocation;
   let audioComponent;
 
+  function pause() {
+    let messageData = 'pause';
+    window.postMessage(messageData, window.location.href);
+  }
+
+  function skip() {
+    let song = findSongById($index[2])
+      if (song) {
+        audioComponent.$destroy();
+        playSong(song.fileName, $index[2]);
+      }
+  }
+
+  function back() {
+    let song = findSongById($index[1])
+      if (song) {
+        audioComponent.$destroy();
+        playSong(song.fileName, $index[1]);
+      }
+  }
   
   async function findSongIndexes(id) {
     let minSong = 1;
@@ -105,7 +125,8 @@
 
 <div class="control-bar">
   <div class="control_container">
-    <div class="back_button">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="back_button" on:click={back}>
       <svg viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Frame">
           <path
@@ -116,7 +137,8 @@
         </g>
       </svg>
     </div>
-    <div class="pause_button">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="pause_button" on:click={pause}>
       <svg
         width="31"
         height="36"
@@ -131,7 +153,8 @@
         />
       </svg>
     </div>
-    <div class="forward_button">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="forward_button" on:click={skip}>
       <svg
         width="28"
         height="32"
