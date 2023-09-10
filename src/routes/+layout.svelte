@@ -88,6 +88,7 @@
           artist,
           albumArt,
           tracks: [],
+          ids: [],
         };
       }
 
@@ -95,6 +96,8 @@
         track,
         albumArt,
       });
+
+      albumMap[album].ids.push(song.id);
     });
 
     albums.set(

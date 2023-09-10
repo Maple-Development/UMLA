@@ -25,6 +25,9 @@
     if (type == 'playlist') {
       handlePlaylist(title);
     }
+    if (type == 'album') {
+      handleAlbum(title);
+    }
     if (location !== 'local' && location !== undefined) {
       let messageData = {
         fileName: fileName,
@@ -47,6 +50,11 @@
 
   function handlePlaylist(title) {
     const url = '/playlist?playlist=' + title;
+    goto(url);
+  }
+
+  function handleAlbum(title) {
+    const url = '/album?album=' + title;
     goto(url);
   }
 </script>
