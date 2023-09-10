@@ -1,5 +1,106 @@
 <script>
   import { currentlyPlaying } from '$lib/store.js';
+  import AudioHandler from './AudioHandler.svelte';
+  import { browser } from '$app/environment';
+  import { audio } from '$lib/store.js';
+  import { handle } from '$lib/store.js';
+  import { songs } from '$lib/store.js';
+  import { goto } from '$app/navigation';
+  import { libLocation } from '$lib/store.js';
+  import { index } from '$lib/store.js'
+
+  $: location = $libLocation;
+  let audioComponent;
+
+  
+  async function findSongIndexes(id) {
+    let minSong = 1;
+    let maxSong = $songs.length;
+    let lastSong = id - 1;
+    let nextSong = id + 1;
+
+    if (lastSong < minSong) {
+      lastSong = maxSong;
+    }
+    if (nextSong > maxSong) {
+      nextSong = minSong;
+    }
+    index.set([id, lastSong, nextSong]);
+  }
+
+
+  async function playSong(fileName, id) {
+    if (audioComponent) {
+      audioComponent.$destroy();
+    }
+    audioComponent = new AudioHandler({ target: document.body });
+    const song = await $handle.getFileHandle(fileName);
+    const file = await song.getFile();
+    const url = URL.createObjectURL(file);
+    audio.set(url);
+    await findSongIndexes(id);
+    setCurrentlyPlaying(fileName);
+  }
+
+  async function playExternalSong(fileName, location, id) {
+    if (audioComponent) {
+      audioComponent.$destroy();
+    }
+    audioComponent = new AudioHandler({ target: document.body });
+    const song = await fetch(location + '/' + fileName);
+    const file = await song.blob();
+    const url = URL.createObjectURL(file);
+    audio.set(url);
+    await findSongIndexes(id);
+    setCurrentlyPlaying(fileName);
+  }
+
+  function findSongById(id) {
+    return $songs.find((song) => song.id === id);
+  }
+
+  if (browser) {
+      window.addEventListener('message', (event) => {
+        // Check the origin of the message (optional)
+        if (event.origin !== window.location.origin) {
+            return;
+        }
+
+        const data = event.data;
+        if (!data.fileName) {
+          return;
+        }
+        if (data.type == 'external') {
+          playExternalSong(data.fileName, location, data.id);
+        } else {
+          playSong(data.fileName, data.id);
+        }
+        
+    }); 
+
+    window.addEventListener('message', (event) => {
+        // Check the origin of the message (optional)
+        if (event.origin !== window.location.origin) {
+            return;
+        }
+
+        const data = event.data;
+        if (data !== 'ended') {
+          return;
+        }
+
+        let song = findSongById($index[2])
+        if (song) {
+          audioComponent.$destroy();
+          playSong(song.fileName, $index[2]);
+        }
+    }); 
+  }
+
+  async function setCurrentlyPlaying(fileName) {
+    const song = $songs.find((song) => song.fileName === fileName);
+    currentlyPlaying.set(song);
+  }
 </script>
 
 <div class="control-bar">

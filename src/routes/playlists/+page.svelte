@@ -24,18 +24,76 @@
     playlistStage2 = false;
   };
 
-  function createPlaylist() {
-    console.log(createSongs);
-    const ids = createSongs.map((song) => song.id);
-    const playlist = {
-      title: createTitle,
-      playlistArt: createArt,
-      songs: ids,
-    };
-    playlists.update((p) => [...p, playlist]);
-    console.log($playlists);
-    reset();
+  async function createPlaylist() {
+  const ids = createSongs.map((song) => song.id);
+  console.log(createArt);
+
+  // Filter out undefined albumArt values and limit to 4 songs
+  const songsWithArt = $songs
+    .filter((s) => ids.includes(s.id) && s.albumArt)
+    .slice(0, 4);
+
+  // Create an array of albumArt values
+  const albumArtArray = songsWithArt.map((song) => song.albumArt);
+
+  if (createArt == '' || createArt == undefined) {
+    // Use the albumArtArray to generate and save the collage
+    if (albumArtArray.length > 3) {
+      createArt = await generateAndSaveCollage(...albumArtArray);
+    } else {
+      const song = $songs.find((s) => s.id == createSongs[0].id);
+      createArt = song.albumArt;
+    }
   }
+
+  const playlist = {
+    title: createTitle,
+    playlistArt: createArt,
+    songs: ids,
+  };
+
+  playlists.update((p) => [...p, playlist]);
+  console.log($playlists);
+  reset();
+}
+
+
+function loadImage(url) {
+    // Create a new Promise
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Failed to load image'));
+    });
+}
+
+
+  async function generateAndSaveCollage(image1, image2, image3, image4) {
+    
+    let imageUrls = [image1, image2, image3, image4];
+    imageUrls = imageUrls.filter((imageUrl) => imageUrl);
+
+
+    const imageElements = await Promise.all(imageUrls.map(loadImage));
+
+    // Create a canvas to draw the collage
+    const canvas = document.createElement('canvas');
+    canvas.width = 400; // Set the desired width
+    canvas.height = 400; // Set the desired height
+    const ctx = canvas.getContext('2d');
+
+    // Draw the images on the canvas
+    for (let i = 0; i < imageElements.length && i < 4; i++) {
+        const x = (i % 2) * 200; // Arrange images in a 2x2 grid
+        const y = Math.floor(i / 2) * 200;
+        ctx.drawImage(imageElements[i], x, y, 200, 200);
+    }
+
+    // Convert the canvas to a data URL and create a download link
+    const collageDataURL = canvas.toDataURL('image/png');
+    return collageDataURL;
+}
 </script>
 
 {#if playlistStage1 == false}

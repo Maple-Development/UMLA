@@ -19,50 +19,30 @@
   if (type === undefined) {
     type = 'song';
   }
-
-  async function findSongIndexes(id) {
-    let minSong = 1;
-    let maxSong = $songs.length;
-    let lastSong = id - 1;
-    let nextSong = id + 1;
-
-    if (lastSong < minSong) {
-      lastSong = maxSong;
-    }
-    if (nextSong > maxSong) {
-      nextSong = minSong;
-    }
-    index.set(lastSong, nextSong);
-  }
-
-  async function playExternalSong(fileName, location) {
-    const song = await fetch(location + '/' + fileName);
-    const file = await song.blob();
-    const url = URL.createObjectURL(file);
-    audio.set(url);
-    await findSongIndexes(id);
-    setCurrentlyPlaying(fileName);
-  }
+  
 
   async function handlePlay(fileName, title, id) {
     if (type == 'playlist') {
       handlePlaylist(title);
     }
     if (location !== 'local' && location !== undefined) {
-      playExternalSong(fileName, location, id);
+      let messageData = {
+        fileName: fileName,
+        title: title,
+        id: id,
+        type: 'external',
+      }
+      window.postMessage(messageData, window.location.href);
       return;
     }
-    const song = await $handle.getFileHandle(fileName);
-    const file = await song.getFile();
-    const url = URL.createObjectURL(file);
-    audio.set(url);
-    await findSongIndexes(id);
-    setCurrentlyPlaying(fileName);
-  }
-
-  async function setCurrentlyPlaying(fileName) {
-    const song = $songs.find((song) => song.fileName === fileName);
-    currentlyPlaying.set(song);
+    let messageData = {
+        fileName: fileName,
+        title: title,
+        id: id,
+        type: 'internal',
+      }
+      window.postMessage(messageData, window.location.href);
+      return;
   }
 
   function handlePlaylist(title) {

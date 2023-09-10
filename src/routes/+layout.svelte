@@ -179,7 +179,6 @@
 {/if}
 <br /><br /><br /><br />
 <ControlBar />
-<audio stlye="display:none" id="audio" src=""></audio>
 
 <style>
   .welcome4 {

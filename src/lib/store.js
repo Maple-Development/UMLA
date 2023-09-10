@@ -40,7 +40,7 @@ if (browser) {
 if (browser) {
   audio.subscribe((value) => {
     if (value) {
-      var audioElement = document.getElementById('audio');
+      var audioElement = document.getElementsByTagName('audio')[0];
       audioElement.src = value;
       audioElement.play().catch((err) => {
         console.log(err);
