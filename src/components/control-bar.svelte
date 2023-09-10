@@ -8,9 +8,11 @@
   import { goto } from '$app/navigation';
   import { libLocation } from '$lib/store.js';
   import { index } from '$lib/store.js'
+  import { Range } from 'flowbite-svelte';
 
   $: location = $libLocation;
   let audioComponent;
+  let volume = 0.8;
 
   function pause() {
     let messageData = 'pause';
@@ -25,6 +27,11 @@
       }
   }
 
+  function updateVolume() {
+    if (audioComponent) {
+      audioComponent.setVolume(volume);
+    }
+  }
   function back() {
     let song = findSongById($index[1])
       if (song) {
@@ -53,7 +60,8 @@
     if (audioComponent) {
       audioComponent.$destroy();
     }
-    audioComponent = new AudioHandler({ target: document.body });
+    audioComponent = new AudioHandler({ target: document.body});
+    updateVolume();
     const song = await $handle.getFileHandle(fileName);
     const file = await song.getFile();
     const url = URL.createObjectURL(file);
@@ -67,6 +75,7 @@
       audioComponent.$destroy();
     }
     audioComponent = new AudioHandler({ target: document.body });
+    updateVolume();
     const song = await fetch(location + '/' + fileName);
     const file = await song.blob();
     const url = URL.createObjectURL(file);
@@ -241,6 +250,6 @@
         />
       </svg>
     </div>
-    <input type="range" min="1" max="100" value="50" class="volume_slider" />
+    <Range class="mt-6 ml-2" id="range-steps" min="0" max="1" bind:value={volume} on:change={updateVolume} step="0.01" />
   </div>
 </div>
