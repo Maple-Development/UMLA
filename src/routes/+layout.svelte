@@ -163,7 +163,7 @@
 
 <NavBar />
 <slot />
-{#if modal == true}
+{#if modal == true} 
   <div class="welcome4">
     <div class="welcome5">
       <h1>Welcome!</h1>
