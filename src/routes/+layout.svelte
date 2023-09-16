@@ -11,7 +11,7 @@
   import { get, set } from 'idb-keyval';
   import { songs } from '$lib/store.js';
   import { albums } from '$lib/store.js';
-  import { libLocation } from '$lib/store.js';
+  import { libLocation, artists } from '$lib/store.js';
 
   $: location = $libLocation;
 
@@ -60,6 +60,7 @@
     await verifyPermission($handle);
     await setLibrarySongs($handle);
     await setAlbumSongs();
+    await setArtists();
     closeModal();
   }
 
@@ -105,12 +106,31 @@
     );
   }
 
+  async function setArtists() {
+    const artistsMap = {};
+
+    $songs.forEach((song) => {
+      const artist = song.artist;
+      if (!(artist in artistsMap)) {
+        artistsMap[artist] = {
+          name: artist,
+          albumArt: '',
+          ids: [],
+        };
+      }
+      artistsMap[artist].ids.push(song.id);
+    });
+
+    artists.set(Object.values(artistsMap));
+  }
+
   async function loadExternalLibrary() {
     const response = await fetch(location + '/umla.data/songMd.json');
     const json = await response.json();
     let songData = await getExternalSongImages(location, json.songMd);
     songs.set(songData);
     await setAlbumSongs();
+    await setArtists();
   }
 
   async function getExternalSongImages(location, json) {

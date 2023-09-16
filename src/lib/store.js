@@ -3,6 +3,7 @@ import { browser } from '$app/environment';
 
 export const songs = writable([]);
 export const albums = writable([]);
+export const artists = writable([]);
 export const audio = writable(null);
 export const handle = writable(null);
 export const index = writable([]);
