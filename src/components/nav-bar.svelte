@@ -206,7 +206,11 @@
       <DropdownItem class="text-black"
         ><a href="/settings">Settings</a></DropdownItem
       >
+    <DropdownItem class="text-black"
+        ><a href="/host">Stream Library</a></DropdownItem
+      >
     </Dropdown>
+    
   </div>
   <div id="nav-move"></div>
   <Tooltip
