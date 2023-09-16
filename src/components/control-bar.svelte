@@ -4,7 +4,7 @@
   import { browser } from '$app/environment';
   import { audio } from '$lib/store.js';
   import { handle } from '$lib/store.js';
-  import { songs } from '$lib/store.js';
+  import { songs, shufflePlaylist } from '$lib/store.js';
   import { goto } from '$app/navigation';
   import { libLocation } from '$lib/store.js';
   import { index } from '$lib/store.js'
@@ -13,6 +13,11 @@
   $: location = $libLocation;
   let audioComponent;
   let volume = 0.8;
+
+  function randomize() {
+    shufflePlaylist.set(!$shufflePlaylist);
+    findSongIndexes($index[0]);
+  }
 
   function pause() {
     let messageData = 'pause';
@@ -49,6 +54,23 @@
   }
   
   async function findSongIndexes(id) {
+    if ($shufflePlaylist) {
+      id = Math.floor(Math.random() * $songs.length);
+      console.log("shuffled");
+      let minSong = 1;
+      let maxSong = $songs.length;
+      let lastSong = id - 1;
+      let nextSong = id + 1;
+
+      if (lastSong < minSong) {
+        lastSong = maxSong;
+      }
+      if (nextSong > maxSong) {
+        nextSong = minSong;
+      }
+      index.set([id, lastSong, nextSong]);
+      return;
+    }
     let minSong = 1;
     let maxSong = $songs.length;
     let lastSong = id - 1;
@@ -192,7 +214,8 @@
         </g>
       </svg>
     </div>
-    <div class="shuffle_button">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="shuffle_button" on:click={randomize}>
       <svg
         width="25"
         height="28"
