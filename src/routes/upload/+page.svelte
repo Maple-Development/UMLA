@@ -218,16 +218,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #000;
+    background-color: #000853;
     padding: 20px;
     border-radius: 20px;
-    border: 2px solid #81f0ff;
+    border: 2px solid #c0ceff;
   }
 
   .welcome h1 {
     font-family: Ubuntu;
     font-size: 50px;
-    color: #81f0ff;
+    color: #c0ceff;
     margin-bottom: 0;
   }
 
@@ -241,7 +241,7 @@
     width: 200px;
     height: 50px;
     border-radius: 54px;
-    background: #1a1b23;
+    background: #4f7fff;
     margin-top: 25px;
     color: white;
     border: none;
