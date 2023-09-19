@@ -78,7 +78,7 @@
             width="1512"
             height="982"
             transform="translate(-30 -19)"
-            fill="black"
+            fill="#01052d"
           />
           <path
             id="Vector"

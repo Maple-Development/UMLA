@@ -10,9 +10,13 @@
   margin-left: 1vw;
 }
 
+.back_button svg g path {
+  fill: #c0ceff;
+}
+
 .back_button:hover svg path,
 .back_button:hover {
-  fill: #8361ff;
+  fill: #4f7fff;
 }
 
 .pause_button svg {
@@ -22,9 +26,13 @@
   margin-left: 1vw;
 }
 
+.pause_button svg path {
+  fill: #c0ceff;
+}
+
 .pause_button:hover svg path,
 .pause_button:hover {
-  fill: #8361ff;
+  fill: #4f7fff;
 }
 
 .forward_button svg {
@@ -34,9 +42,13 @@
   margin-left: 1vw;
 }
 
+.forward_button svg g path {
+  fill: #c0ceff;
+}
+
 .forward_button:hover svg g path,
 .forward_button:hover {
-  fill: #8361ff;
+  fill: #4f7fff;
 }
 
 .shuffle_button svg {
@@ -47,9 +59,13 @@
   margin-top: 0.3vh;
 }
 
+.shuffle_button svg g path {
+  fill: #c0ceff;
+}
+
 .shuffle_button:hover svg g path,
 .shuffle_button:hover {
-  fill: #8361ff;
+  fill: #4f7fff;
 }
 
 .loop_button svg {
@@ -60,9 +76,13 @@
   margin-top: 0.3vh;
 }
 
+.loop_button svg g path {
+  fill: #c0ceff;
+}
+
 .loop_button:hover svg g path,
 .loop_button:hover {
-  fill: #8361ff;
+  fill: #4f7fff;
 }
 
 /* Middle Part */
@@ -112,6 +132,10 @@
   width: 3vh;
   z-index: 2;
   margin-top: 1vh;
+}
+
+.volume_button svg path {
+  fill: #c0ceff;
 }
 
 .volume_slider {

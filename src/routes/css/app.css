@@ -16,8 +16,8 @@ html {
 }
 body {
   margin: 0;
-  background-color: #000;
-  color: white;
+  background-color: #000853;
+  color: #c0ceff;
   text-align: center;
 }
 
@@ -35,7 +35,7 @@ body {
 .nav-bar {
   height: 6vh;
   width: 100%;
-  background-color: #000;
+  background-color: #01052d;
   border-bottom: 5px solid #131a59;
   display: flex;
   justify-content: flex=start;
@@ -44,7 +44,7 @@ body {
 .control-bar {
   height: 6vh;
   width: 100%;
-  background-color: #000;
+  background-color: #01052d;
   position: fixed;
   bottom: 0;
   border-top: 5px solid #131a59;
@@ -56,6 +56,11 @@ body {
   height: 3vh;
   margin-top: 1.5vh;
   margin-left: 1vw;
+}
+
+.upload_icon svg g path {
+  transition: 1s;
+  fill: #c0ceff;
 }
 
 .upload_icon svg g path {
@@ -90,6 +95,7 @@ body {
 
 .library_icon svg path {
   transition: 1s;
+  fill: #c0ceff;
 }
 
 .album_icon {
@@ -100,6 +106,7 @@ body {
 
 .album_icon svg path {
   transition: 1s;
+  fill: #c0ceff;
 }
 
 .search_icon {
@@ -110,6 +117,7 @@ body {
 
 .search_icon svg g path {
   transition: 1s;
+  fill: #c0ceff;
 }
 
 .playlist_icon {
@@ -120,6 +128,7 @@ body {
 
 .playlist_icon svg g path {
   transition: 1s;
+  fill: #c0ceff;
 }
 
 /* Sliding animation instead
@@ -152,7 +161,7 @@ body {
 
 .nav_text {
   margin-left: 0.5vw;
-  color: #fff;
+  color: #c0ceff;
   font-size: 3vh;
   font-family: Ubuntu;
   font-weight: 500;
@@ -222,7 +231,7 @@ body {
   margin-top: 0.5vh;
   margin-bottom: 0;
   text-align: left;
-  color: #4f5bc6;
+  color: #4f7fff;
   font-size: 1.5vh;
   text-overflow: ellipsis;
   width: 200px;
@@ -243,7 +252,7 @@ body {
   transition:
     visibility 0s,
     opacity 0.5s linear;
-  fill: rgb(255, 37, 37);
+  fill: #3dba93;
 }
 
 .album_art {
@@ -257,7 +266,7 @@ body {
 .album_art:hover + .play_hover {
   visibility: visible;
   opacity: 1;
-  fill: rgb(255, 37, 37);
+  fill: #3dba93;
   transition: fill 100ms linear;
 }
 
