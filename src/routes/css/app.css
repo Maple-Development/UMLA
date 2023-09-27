@@ -202,7 +202,12 @@ body {
 
 .favorites {
   margin: 1.5vh;
+  padding: 1.5vh;
   display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
   flex-wrap: wrap;
   background-color: var(--md-sys-color-surface-container);
   border-radius: 10px;
@@ -283,6 +288,7 @@ body {
   margin-top: 3vh;
   margin-left: 3vh;
   margin-right: 3vh;
+  border-radius: 7px;
 }
 
 .album_art:hover + .play_hover {
