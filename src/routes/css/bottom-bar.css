@@ -16,7 +16,7 @@
 
 .back_button:hover svg path,
 .back_button:hover {
-  fill: #000;
+  fill: var(--md-sys-color-on-tertiary-fixed);
 }
 
 .pause_button svg {
@@ -32,7 +32,7 @@
 
 .pause_button:hover svg path,
 .pause_button:hover {
-  fill: #000;
+  fill: var(--md-sys-color-on-tertiary-fixed);
 }
 
 .forward_button svg {
@@ -48,7 +48,7 @@
 
 .forward_button:hover svg g path,
 .forward_button:hover {
-  fill: #4f7fff;
+  fill: var(--md-sys-color-on-tertiary-fixed);
 }
 /* Middle Part */
 
@@ -102,6 +102,11 @@
   margin-top: 1vh;
 }
 
+.volume_button:hover svg path,
+.volume_button:hover {
+  fill: var(--md-sys-color-on-tertiary-fixed);
+}
+
 .shuffle_button svg {
   height: 4vh;
   width: 3vh;
@@ -116,7 +121,7 @@
 
 .shuffle_button:hover svg g path,
 .shuffle_button:hover {
-  fill: #4f7fff;
+  fill: var(--md-sys-color-on-tertiary-fixed);
 }
 
 .loop_button svg {
@@ -133,7 +138,7 @@
 
 .loop_button:hover svg g path,
 .loop_button:hover {
-  fill: #4f7fff;
+  fill: var(--md-sys-color-on-tertiary-fixed);
 }
 
 
