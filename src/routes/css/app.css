@@ -201,7 +201,7 @@ body {
 /* MATERIAL */
 
 .favorites {
-  margin: 1.5vh;
+  margin: 2vh;
   padding: 1.5vh;
   display: flex;
   flex-direction: column;
@@ -211,6 +211,114 @@ body {
   flex-wrap: wrap;
   background-color: var(--md-sys-color-surface-container);
   border-radius: 10px;
+}
+
+.favorites-alt {
+  margin-top: 3vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-bottom: 0vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
+  flex-wrap: wrap;
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: 10px;
+}
+
+.album_bar {
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-top: 2vh;
+  padding: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
+  flex-wrap: wrap;
+  background-color: var(--md-sys-color-tertiary-container);
+  border-radius: 10px;
+}
+
+.playlist_title {
+  color: var(--md-sys-color-on-tertiary-container);
+  font-family: Ubuntu;
+  font-size: 3em;
+  margin-top: 0vh;
+  margin-left: 3vh;
+  margin-bottom: 0.2vh;
+}
+
+.playlist_artist {
+  color: var(--md-sys-color-on-tertiary-fixed);
+  font-family: Ubuntu;
+  margin-left: 3vh;
+  margin-bottom: 0;
+  text-align: left;
+  font-size: 1.3em;
+}
+
+.album_big {
+  height: 225px;
+  width: 225px;
+  border-radius: 7px;
+}
+
+.outer-track {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-track {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.track-text {
+  color: var(--md-sys-color-on-surface);
+  font-size: 24px;
+}
+
+.song_title-alt {
+  font-family: Ubuntu;
+  font-size: 2vh;
+  text-align: left;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+  color: var(--md-sys-color-on-surface)
+}
+
+.song_title-alt:hover {
+  color: var(--md-sys-color-primary-fixed);
+  cursor: pointer;
+}
+
+.hov-container {
+  background-color: var(--md-sys-color-surface-container);
+}
+
+.hov-container:hover {
+  filter: brightness(80%);
+}
+
+.album_art-alt {
+  height: 50px;
+  width: 50px;
+}
+
+.song_artist-alt {
+  font-family: Ubuntu;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
+  text-align: left;
+  color: var(--md-sys-color-primary);
+  font-size: 1.5vh;
 }
 
 .favorites_header {
