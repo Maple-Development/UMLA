@@ -97,8 +97,8 @@ function loadImage(url) {
 </script>
 
 {#if playlistStage1 == false}
-  <h1 class="title">Playlists</h1>
-
+  <div class="favorites">
+    <h1 class="favorites_header">Playlists</h1>
   <div class="outer-card">
     <div class="card_vert">
       <div class="img_container">
@@ -114,23 +114,24 @@ function loadImage(url) {
           <g id="Capa_1" clip-path="url(#clip0_261_223)">
             <g id="SVGRepo_iconCarrier">
               <path
+                class="path1"
                 id="Vector"
                 d="M50 100C77.6142 100 100 77.6142 100 50C100 22.3858 77.6142 0 50 0C22.3858 0 0 22.3858 0 50C0 77.6142 22.3858 100 50 100Z"
-                fill="#232323"
+                fill=""
               />
               <path
+                class="path2"
                 id="Vector_2"
                 d="M50 26V76"
-                stroke="white"
                 stroke-width="2"
                 stroke-miterlimit="10"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
+                class="path2"
                 id="Vector_3"
                 d="M75 50H25"
-                stroke="white"
                 stroke-width="2"
                 stroke-miterlimit="10"
                 stroke-linecap="round"
@@ -159,6 +160,7 @@ function loadImage(url) {
         />
       {/each}
     {/if}
+  </div>
   </div>
 {:else if playlistStage1 == true && playlistStage2 == false}
   <div class="welcome">
@@ -223,6 +225,14 @@ function loadImage(url) {
 {/if}
 
 <style>
+  .path1 {
+    fill: var(--md-sys-color-on-secondary-container);
+  }
+
+  .path2 {
+    stroke: var(--md-sys-color-on-secondary-fixed-variant);
+  }
+
   .checkbox-align {
     display: flex;
     align-items: center;
@@ -237,19 +247,9 @@ function loadImage(url) {
     justify-content: center;
     align-items: center;
   }
-
-  .title {
-    font-family: Ubuntu;
-    color: white;
-    margin-top: 25px;
-    margin-left: 50px;
-    text-align: left;
-    font-size: 45px;
-    margin-bottom: 0;
-  }
-
+  
   .fill_grey {
-    background-color: #1a1b23;
+    background-color: var(--md-sys-color-on-secondary-fixed);
     height: 200px;
     width: 200px;
     margin-left: 3vh;

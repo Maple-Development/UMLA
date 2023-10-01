@@ -4,6 +4,8 @@
 </script>
 
 {#if $albums.length > 0}
+<div class="favorites">
+  <h1 class="favorites_header">Albums</h1>
   <div class="outer-card">
     {#each $albums as album}
       <LargeSongCard
@@ -14,4 +16,5 @@
       />
     {/each}
   </div>
+</div>
 {/if}

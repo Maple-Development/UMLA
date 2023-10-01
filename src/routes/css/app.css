@@ -24,7 +24,7 @@ body {
 
 #nav-move {
   position: absolute;
-  top: 6px;
+  top: 7px;
   border-radius: 13px;
   background: var(--md-sys-color-primary-container);
   left: 0;
@@ -140,21 +140,21 @@ body {
 */
 
 .library {
-  margin-top: 1.5vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
 }
 
 .albums {
-  margin-top: 1.5vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
 }
 
 .playlists {
-  margin-top: 1.5vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
@@ -172,7 +172,7 @@ body {
 }
 
 .search {
-  margin-top: 2vh;
+  margin-top: 2.3vh;
   margin-left: 1.5vw;
   display: flex;
 }
@@ -217,9 +217,9 @@ body {
   color: var(--md-sys-color-tertiary);
   font-family: Ubuntu;
   font-size: 2.2em;
-  margin-top: 3vh;
+  margin-top: 0.5vh;
   margin-left: 3vh;
-  margin-bottom: 1.5vh;
+  margin-bottom: 1vh;
 }
 
 
