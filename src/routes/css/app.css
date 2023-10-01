@@ -1,5 +1,6 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+@import url('material/theme.css');
 
 html {
   overflow: scroll;
@@ -16,16 +17,16 @@ html {
 }
 body {
   margin: 0;
-  background-color: #000853;
-  color: #c0ceff;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
   text-align: center;
 }
 
 #nav-move {
   position: absolute;
-  top: 3px;
+  top: 7px;
   border-radius: 13px;
-  background: rgb(97 109 216 / 45%);
+  background: var(--md-sys-color-primary-container);
   left: 0;
   display: none;
   transition: 0.2s;
@@ -33,10 +34,9 @@ body {
 }
 
 .nav-bar {
-  height: 6vh;
+  height: 7vh;
   width: 100%;
-  background-color: #01052d;
-  border-bottom: 5px solid #131a59;
+  background-color: var(--md-sys-color-surface);
   display: flex;
   justify-content: flex=start;
 }
@@ -44,23 +44,23 @@ body {
 .control-bar {
   height: 6vh;
   width: 100%;
-  background-color: #01052d;
+  background-color: var(--md-sys-color-tertiary-container);
   position: fixed;
   bottom: 0;
-  border-top: 5px solid #131a59;
+  border-top: 5px solid var(--md-sys-color-tertiary);
   display: flex;
   justify-content: space-between;
 }
 
 .upload_icon svg {
   height: 3vh;
-  margin-top: 1.5vh;
+  margin-top: 1.9vh;
   margin-left: 1vw;
 }
 
 .upload_icon svg g path {
   transition: 1s;
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-surface);
 }
 
 .upload_icon svg g path {
@@ -74,12 +74,13 @@ body {
 
 .refresh_icon svg {
   height: 3vh;
-  margin-top: 1.3vh;
+  margin-top: 1.5vh;
   margin-right: 0.5vw;
 }
 
 .refresh_icon svg g path {
   transition: 1s;
+  fill: var(--md-sys-color-on-surface);
 }
 
 .refresh_icon:hover svg g path,
@@ -95,7 +96,7 @@ body {
 
 .library_icon svg path {
   transition: 1s;
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-surface);
 }
 
 .album_icon {
@@ -106,7 +107,7 @@ body {
 
 .album_icon svg path {
   transition: 1s;
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-surface);
 }
 
 .search_icon {
@@ -117,7 +118,7 @@ body {
 
 .search_icon svg g path {
   transition: 1s;
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-surface);
 }
 
 .playlist_icon {
@@ -128,7 +129,7 @@ body {
 
 .playlist_icon svg g path {
   transition: 1s;
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-surface);
 }
 
 /* Sliding animation instead
@@ -139,21 +140,21 @@ body {
 */
 
 .library {
-  margin-top: 1vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
 }
 
 .albums {
-  margin-top: 1vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
 }
 
 .playlists {
-  margin-top: 1vh;
+  margin-top: 1.8vh;
   margin-left: 1.5vw;
   display: flex;
   padding-top: 0.5vh;
@@ -161,8 +162,8 @@ body {
 
 .nav_text {
   margin-left: 0.5vw;
-  color: #c0ceff;
-  font-size: 3vh;
+  color: var(--md-sys-color-on-surface);
+  font-size: 1.5em;
   font-family: Ubuntu;
   font-weight: 500;
   line-height: 90%;
@@ -171,7 +172,7 @@ body {
 }
 
 .search {
-  margin-top: 1.5vh;
+  margin-top: 2.3vh;
   margin-left: 1.5vw;
   display: flex;
 }
@@ -183,10 +184,10 @@ body {
 }
 
 .profile img {
-  height: 4vh;
-  width: 4vh;
-  margin-top: 0.8vh;
-  border: 2px solid #613dff;
+  height: 5vh;
+  width: 5vh;
+  margin-top: 1vh;
+  border: 2px solid var(--md-sys-color-primary);
   border-radius: 50%;
 }
 
@@ -197,10 +198,35 @@ body {
   margin-left: auto;
 }
 
+/* MATERIAL */
+
+.favorites {
+  margin: 1.5vh;
+  padding: 1.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
+  flex-wrap: wrap;
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: 10px;
+}
+
+.favorites_header {
+  color: var(--md-sys-color-tertiary);
+  font-family: Ubuntu;
+  font-size: 2.2em;
+  margin-top: 0.5vh;
+  margin-left: 3vh;
+  margin-bottom: 1vh;
+}
+
+
 .outer-card {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 1vw;
+  margin-left: 2vw;
 }
 
 .outer-card .img_container img {
@@ -223,6 +249,7 @@ body {
   margin-bottom: 0;
   text-overflow: ellipsis;
   width: 200px;
+  color: var(--md-sys-color-on-surface)
 }
 
 .song_artist {
@@ -231,7 +258,7 @@ body {
   margin-top: 0.5vh;
   margin-bottom: 0;
   text-align: left;
-  color: #4f7fff;
+  color: var(--md-sys-color-primary);
   font-size: 1.5vh;
   text-overflow: ellipsis;
   width: 200px;
@@ -261,6 +288,7 @@ body {
   margin-top: 3vh;
   margin-left: 3vh;
   margin-right: 3vh;
+  border-radius: 7px;
 }
 
 .album_art:hover + .play_hover {

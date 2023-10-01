@@ -22,8 +22,8 @@
 
       const rect = e.target.getBoundingClientRect();
 
-      document.getElementById('nav-move').style.width = rect.width - -45 + 'px';
-      document.getElementById('nav-move').style.height = rect.height + 6 + 'px';
+      document.getElementById('nav-move').style.width = rect.width - -42 + 'px';
+      document.getElementById('nav-move').style.height = rect.height + 2 + 'px';
 
       requestAnimationFrame(() => {
         document.getElementById('nav-move').style.display = 'block';
@@ -36,7 +36,7 @@
         document.getElementById('nav-move').style.transition = `0.2s`;
       }
 
-      document.getElementById('nav-move').style.left = `${rect.x - 45 + 5}px`;
+      document.getElementById('nav-move').style.left = `${rect.x - 45 + 9}px`;
 
       hovered = true;
     };
@@ -72,18 +72,18 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg%22%3E"
       >
-        <rect width="27" height="29" fill="#1E1E1E" />
+        <rect width="27" height="29" />
         <g id="MacBook Pro 14&#34; - 1" clip-path="url(#clip0_0_1)">
           <rect
             width="1512"
             height="982"
             transform="translate(-30 -19)"
-            fill="#01052d"
+            fill="transparent"
           />
           <path
             id="Vector"
             d="M15.1875 6.18971V19.9371C15.1875 20.9396 14.4334 21.7496 13.5 21.7496C12.5666 21.7496 11.8125 20.9396 11.8125 19.9371V6.18971L7.9418 10.3473C7.28262 11.0554 6.21211 11.0554 5.55293 10.3473C4.89375 9.63929 4.89375 8.48943 5.55293 7.78139L12.3029 0.531032C12.9621 -0.177011 14.0326 -0.177011 14.6918 0.531032L21.4418 7.78139C22.101 8.48943 22.101 9.63929 21.4418 10.3473C20.7826 11.0554 19.7121 11.0554 19.0529 10.3473L15.1875 6.18971ZM3.375 19.9371H10.125C10.125 21.9366 11.6385 23.5622 13.5 23.5622C15.3615 23.5622 16.875 21.9366 16.875 19.9371H23.625C25.4865 19.9371 27 21.5627 27 23.5622V25.3748C27 27.3743 25.4865 29 23.625 29H3.375C1.51348 29 0 27.3743 0 25.3748V23.5622C0 21.5627 1.51348 19.9371 3.375 19.9371ZM22.7812 25.828C23.1169 25.828 23.4388 25.6847 23.6762 25.4298C23.9135 25.1749 24.0469 24.8291 24.0469 24.4685C24.0469 24.108 23.9135 23.7622 23.6762 23.5073C23.4388 23.2523 23.1169 23.1091 22.7812 23.1091C22.4456 23.1091 22.1237 23.2523 21.8863 23.5073C21.649 23.7622 21.5156 24.108 21.5156 24.4685C21.5156 24.8291 21.649 25.1749 21.8863 25.4298C22.1237 25.6847 22.4456 25.828 22.7812 25.828Z"
-            fill="#81F0FF"
+            fill="transparent"
           />
         </g>
         <defs>
@@ -91,7 +91,6 @@
             <rect
               width="1512"
               height="982"
-              fill="white"
               transform="translate(-30 -19)"
             />
           </clipPath>
@@ -146,7 +145,7 @@
             fill="#81F0FF"
           />
           <path
-            id="Vector_2"
+           x id="Vector_2"
             d="M1.8 9.0625H10.8C11.7941 9.0625 12.6 8.25095 12.6 7.25C12.6 6.24893 11.7941 5.4375 10.8 5.4375H1.8C0.805952 5.4375 0 6.24893 0 7.25C0 8.25095 0.805952 9.0625 1.8 9.0625Z"
             fill="#81F0FF"
           />
@@ -193,27 +192,6 @@
   </div>
 
   <div class="profile">
-    <div id="type-dark" class="refresh_icon">
-      <svg
-        fill="#81F0FF"
-        version="1.1"
-        id="Capa_1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 489.533 489.533"
-        xml:space="preserve"
-      >
-        <g>
-          <path
-            fill="#81F0FF"
-            d="M268.175,488.161c98.2-11,176.9-89.5,188.1-187.7c14.7-128.4-85.1-237.7-210.2-239.1v-57.6c0-3.2-4-4.9-6.7-2.9
-            l-118.6,87.1c-2,1.5-2,4.4,0,5.9l118.6,87.1c2.7,2,6.7,0.2,6.7-2.9v-57.5c87.9,1.4,158.3,76.2,152.3,165.6
-            c-5.1,76.9-67.8,139.3-144.7,144.2c-81.5,5.2-150.8-53-163.2-130c-2.3-14.3-14.8-24.7-29.2-24.7c-17.9,0-31.9,15.9-29.1,33.6
-            C49.575,418.961,150.875,501.261,268.175,488.161z"
-          />
-        </g>
-      </svg>
-    </div>
     <Avatar class="acs" src="/assets/pfp-placeholder.png" />
     <Dropdown triggeredBy=".acs">
       <DropdownItem class="text-black"

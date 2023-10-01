@@ -3,6 +3,7 @@
   import { Label, Input, Helper, Button } from 'flowbite-svelte';
 
   let value;
+  let css;
   const submit = () => {
     const linkRegex = /\/$/;
     const modifiedValue = value.replace(linkRegex, ''); // Removes trailing /
@@ -15,13 +16,50 @@
     libLocation.set('local');
     window.location.reload();
   };
+
+const submitTheme = () => {
+  const reader = new FileReader();
+  reader.onload = event => {
+    const cssText = event.target.result;
+    const regex = /--md-sys-color-([\w-]+-dark):\s*(.*?);/g;
+    let match;
+    let newStyles = ":root {\n";
+    while ((match = regex.exec(cssText)) !== null) {
+      const variable = match[1];
+      const value = match[2];
+      const updatedStyle = `  --md-sys-color-${variable.replace("-dark", "")}: ${value.trim()} !important;\n`;
+      newStyles += updatedStyle;
+    }
+    newStyles += "}";
+
+    const styleId = "theme-override";
+    let existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+      existingStyle.textContent = newStyles;
+    } else {
+      existingStyle = document.createElement("style");
+      existingStyle.id = styleId;
+      existingStyle.textContent = newStyles;
+      document.head.appendChild(existingStyle);
+    }
+
+    localStorage.setItem("themeStyles", newStyles);
+  };
+  reader.onerror = error => reject(error);
+  reader.readAsText(css);
+};
+
+  const resetTheme = () => {
+
+  };
 </script>
 
 <h1 class="title">Settings</h1>
-
+<div class="favorites">
+  <h1 class="favorites_header">Custom Location</h1>
 <form id="set-location" on:submit={submit} on:reset={reset}>
-  <Label class="space-y-2 flex justify-center flex-col items-center pb-3">
-    <span class="text-white text-xl">Add a Song Location</span>
+  <Label class="space-y-2 flex flex-col pb-3">
+    <span class="text-xl" style="color: var(--md-sys-color-on-surface);">Add a Song Location</span>
     <Input
       bind:value
       class="w-3/4"
@@ -30,9 +68,29 @@
       size="md"
     />
   </Label>
-  <Button type="submit">Submit</Button>
-  <Button type="reset">Reset</Button>
+  <Button class="w-24" type="submit">Submit</Button>
+  <Button class="w-24" type="reset">Reset</Button>
 </form>
+</div>
+
+<form on:submit={submitTheme} on:reset={resetTheme}>
+<div class="favorites">
+  <h1 class="favorites_header">Themes</h1>
+    <span class="text-xl" style="color: var(--md-sys-color-on-surface);">Please upload tokens.css from a <a style="color: var(--md-sys-color-primary)" href="https://www.figma.com/community/plugin/1034969338659738588/material-theme-builder">Material You</a> theme archive.</span>
+   <input
+      type="file"
+      id="theme-import"
+      on:change={(e) => (css = e.target.files[0])}
+      class="mb-2"
+      accept="*.css"
+    />
+    <Label class="space-y-2 inline-block pb-3">
+    <Button class="w-24" type="submit">Submit</Button>
+    <Button class="w-24" type="reset">Reset</Button>
+  </Label>
+</div>
+</form>
+
 
 <style>
   .title {

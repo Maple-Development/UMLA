@@ -11,12 +11,12 @@
 }
 
 .back_button svg g path {
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-tertiary-container);
 }
 
 .back_button:hover svg path,
 .back_button:hover {
-  fill: #4f7fff;
+  fill: #000;
 }
 
 .pause_button svg {
@@ -27,12 +27,12 @@
 }
 
 .pause_button svg path {
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-tertiary-container);
 }
 
 .pause_button:hover svg path,
 .pause_button:hover {
-  fill: #4f7fff;
+  fill: #000;
 }
 
 .forward_button svg {
@@ -43,52 +43,18 @@
 }
 
 .forward_button svg g path {
-  fill: #c0ceff;
+  fill: var(--md-sys-color-on-tertiary-container);
 }
 
 .forward_button:hover svg g path,
 .forward_button:hover {
   fill: #4f7fff;
 }
-
-.shuffle_button svg {
-  height: 2vh;
-  width: 1.5vh;
-  z-index: 2;
-  margin-left: 1vw;
-  margin-top: 0.3vh;
-}
-
-.shuffle_button svg g path {
-  fill: #c0ceff;
-}
-
-.shuffle_button:hover svg g path,
-.shuffle_button:hover {
-  fill: #4f7fff;
-}
-
-.loop_button svg {
-  height: 2vh;
-  width: 1.5vh;
-  z-index: 2;
-  margin-left: 1vw;
-  margin-top: 0.3vh;
-}
-
-.loop_button svg g path {
-  fill: #c0ceff;
-}
-
-.loop_button:hover svg g path,
-.loop_button:hover {
-  fill: #4f7fff;
-}
-
 /* Middle Part */
 
 .song_info {
   display: flex;
+  margin-left: 2vw;
 }
 
 .song_md {
@@ -110,13 +76,14 @@
   font-size: 2vh;
   text-align: left;
   margin-bottom: 0;
+  color: var(--md-sys-color-on-tertiary-container);
 }
 
 .song_artist_vert {
   font-family: Ubuntu;
   margin-bottom: 0;
   text-align: left;
-  color: #4f5bc6;
+  color: var(--md-sys-color-primary);
   font-size: 1.5vh;
 }
 
@@ -124,6 +91,7 @@
 
 .volume_container {
   display: flex;
+  flex-direction: row;
   margin-right: 1vw;
 }
 
@@ -134,11 +102,41 @@
   margin-top: 1vh;
 }
 
-.volume_button svg path {
-  fill: #c0ceff;
+.shuffle_button svg {
+  height: 4vh;
+  width: 3vh;
+  z-index: 2;
+  margin-left: 0.5vw;
+  margin-top: 1vh;
 }
 
-.volume_slider {
-  margin-left: 1vw;
-  width: 10vw;
+.shuffle_button svg g path {
+  fill: var(--md-sys-color-on-tertiary-container);
+}
+
+.shuffle_button:hover svg g path,
+.shuffle_button:hover {
+  fill: #4f7fff;
+}
+
+.loop_button svg {
+  height: 3vh;
+  width: 2.5vh;
+  z-index: 2;
+  margin-left: 0.5vw;
+  margin-top: 1.5vh;
+}
+
+.loop_button svg g path {
+  fill: var(--md-sys-color-on-tertiary-container);
+}
+
+.loop_button:hover svg g path,
+.loop_button:hover {
+  fill: #4f7fff;
+}
+
+
+.volume_button svg path {
+  fill: var(--md-sys-color-on-tertiary-container);
 }

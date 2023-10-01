@@ -217,10 +217,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #000853;
+    background-color: var(--md-sys-color-primary-container);
     padding: 20px;
     border-radius: 20px;
-    border: 2px solid #c0ceff;
+    border: 2px solid var(--md-sys-color-on-primary-container);
   }
 
   .blur {
@@ -229,26 +229,26 @@
     margin-left: 1vw;
   }
 
-  .welcome4 h1 {
+  .welcome4 .welcome5 h1 {
     font-family: Ubuntu;
     font-size: 50px;
-    color: #c0ceff;
+    color: var(--md-sys-color-on-primary-container);
     margin-bottom: 0;
   }
 
-  .welcome4 p {
+  .welcome4 .welcome5 p {
     font-size: 20px;
-    color: white;
+    color: var(--md-sys-color-on-primary-container);
     margin-top: 5px;
   }
 
-  .welcome4 button {
+  .welcome4 .welcome5 button {
     width: 200px;
     height: 50px;
     border-radius: 54px;
-    background: #4f7fff;
+    background: var(--md-sys-color-on-primary-fixed);
     margin-top: 25px;
-    color: white;
+    color: var(--md-sys-color-on-primary-fixed-dim);
     border: none;
     text-align: center;
   }
@@ -259,6 +259,6 @@
 
   .small1 {
     font-size: 12px !important;
-    color: #8e8e8e !important;
+    color: var(--md-sys-color-primary-fixed-dim) !important;
   }
 </style>

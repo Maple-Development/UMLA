@@ -46,6 +46,20 @@ if (browser) {
     // localStorage only allows strings, so convert non-strings to strings
     localStorage.setItem('shuffle', JSON.stringify(value)),
   );
+
+ if (localStorage.getItem("themeStyles")) {
+   const savedStyles = localStorage.getItem("themeStyles");
+   const styleId = "theme-override";
+    let existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+      existingStyle.textContent = savedStyles;
+    } else {
+      existingStyle = document.createElement("style");
+      existingStyle.id = styleId;
+      existingStyle.textContent = savedStyles;
+      document.head.appendChild(existingStyle);
+    }
+ }
 }
 
 if (browser) {
