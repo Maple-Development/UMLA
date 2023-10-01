@@ -291,7 +291,7 @@ body {
   text-align: left;
   margin-top: 0.5vh;
   margin-bottom: 0;
-  color: var(--md-sys-color-on-surface)
+  color: var(--md-sys-color-primary)
 }
 
 .song_title-alt:hover {
@@ -317,7 +317,7 @@ body {
   margin-top: 0.5vh;
   margin-bottom: 0;
   text-align: left;
-  color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-surface);
   font-size: 1.5vh;
 }
 
