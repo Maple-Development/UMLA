@@ -29,6 +29,7 @@ if (browser) {
 export const libLocation = writable(libraryLocation);
 export const playlists = writable(playlists1);
 export const shufflePlaylist = writable(shuffle);
+export const context = writable([]);
 
 if (browser) {
   // update localStorage values whenever the store values change

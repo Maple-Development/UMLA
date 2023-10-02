@@ -7,6 +7,7 @@
     export let type;
     export let fileName;
     export let id;
+    export let typeId;
   
     $: location = $libLocation;
   
@@ -28,6 +29,8 @@
           title: title,
           id: id,
           type: 'external',
+          context: type,
+          typeId: typeId
         }
         window.postMessage(messageData, window.location.href);
         return;
@@ -37,6 +40,8 @@
           title: title,
           id: id,
           type: 'internal',
+          context: type,
+          typeId: typeId
         }
         window.postMessage(messageData, window.location.href);
         return;

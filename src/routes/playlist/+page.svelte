@@ -11,11 +11,13 @@
   let playlistSongs = [];
   let showSongs = [];
   let playlistInfo = [];
+  let playlistId;
 
   $: {
     showSongs = [];
     $playlists.forEach((playlist) => {
       if (playlist.title === playlistName) {
+        playlistId = playlist.title;
         playlistInfo = playlist;
         playlistSongs = playlist.songs;
         $songs.forEach((song) => {
@@ -55,6 +57,7 @@
         fileName={song.fileName}
         type="p-song"
         id={song.id}
+        typeId={playlistId}
       />
       </div>
     {/each}

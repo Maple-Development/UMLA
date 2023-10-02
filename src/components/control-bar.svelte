@@ -7,7 +7,7 @@
   import { songs, shufflePlaylist } from '$lib/store.js';
   import { goto } from '$app/navigation';
   import { libLocation } from '$lib/store.js';
-  import { index } from '$lib/store.js'
+  import { index, playlists, albums } from '$lib/store.js'
   import { Range } from 'flowbite-svelte';
 
   $: location = $libLocation;
@@ -28,6 +28,11 @@
     let song = findSongById($index[2])
       if (song) {
         audioComponent.$destroy();
+        if ($index[3] == 'p-song') {
+          playSong(song.fileName, $index[2], $index[3], $index[4]);
+          console.log($index);
+          return;
+        }
         if (location !== 'local' && location !== undefined) {
           playExternalSong(song.fileName, location, $index[2]);
           return;
@@ -53,7 +58,7 @@
       }
   }
   
-  async function findSongIndexes(id) {
+  async function findSongIndexes(id, type, typeId) {
     if ($shufflePlaylist) {
       id = Math.floor(Math.random() * $songs.length);
       console.log("shuffled");
@@ -71,6 +76,34 @@
       index.set([id, lastSong, nextSong]);
       return;
     }
+    console.log(type, typeId);
+      if (type == 'p-song') {
+        let playlist = $playlists.find((p) => p.title == typeId);
+        if (playlist) {
+          id = playlist.songs.indexOf(id);
+          console.log(playlist.songs);
+          console.log("id:   " + id);
+        } else {
+          for (let i = 0; i < $playlists.length; i++) {
+            if ($playlists[i].title == typeId) {
+              id = $playlists[i].songs.indexOf(id);
+            }
+          }
+        }
+        let lastSong = id - 1;
+        let nextSong = id + 1;
+        if (lastSong < 0) {
+          lastSong = playlist.songs.length - 1;
+        }
+        if (nextSong > playlist.songs.length - 1) {
+          nextSong = 0;
+        }
+        let realLastSong = playlist.songs[lastSong] 
+        let realNextSong = playlist.songs[nextSong]
+        index.set([id, realLastSong, realNextSong, type, typeId]);
+        console.log(realLastSong, realNextSong);
+        return;
+      }
     let minSong = 1;
     let maxSong = $songs.length;
     let lastSong = id - 1;
@@ -86,7 +119,7 @@
   }
 
 
-  async function playSong(fileName, id) {
+  async function playSong(fileName, id, type, typeId) {
     if (audioComponent) {
       audioComponent.$destroy();
     }
@@ -96,11 +129,12 @@
     const file = await song.getFile();
     const url = URL.createObjectURL(file);
     audio.set(url);
-    await findSongIndexes(id);
+    await findSongIndexes(id, type, typeId);
     setCurrentlyPlaying(fileName);
+    console.log("ID stuff: " + id + " " + type + " " + typeId);
   }
 
-  async function playExternalSong(fileName, location, id) {
+  async function playExternalSong(fileName, location, id, type, typeId) {
     if (audioComponent) {
       audioComponent.$destroy();
     }
@@ -110,7 +144,7 @@
     const file = await song.blob();
     const url = URL.createObjectURL(file);
     audio.set(url);
-    await findSongIndexes(id);
+    await findSongIndexes(id, type, typeId);
     setCurrentlyPlaying(fileName);
   }
 
@@ -130,9 +164,9 @@
           return;
         }
         if (data.type == 'external') {
-          playExternalSong(data.fileName, location, data.id);
+          playExternalSong(data.fileName, location, data.id, data.context, data.typeId);
         } else {
-          playSong(data.fileName, data.id);
+          playSong(data.fileName, data.id, data.context, data.typeId);
         }
         
     }); 
