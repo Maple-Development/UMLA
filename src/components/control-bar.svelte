@@ -33,6 +33,10 @@
           console.log($index);
           return;
         }
+        if ($index[3] == 'a-song') {
+          playSong(song.fileName, $index[2], $index[3], $index[4]);
+          return;
+        }
         if (location !== 'local' && location !== undefined) {
           playExternalSong(song.fileName, location, $index[2]);
           return;
@@ -100,6 +104,34 @@
         }
         let realLastSong = playlist.songs[lastSong] 
         let realNextSong = playlist.songs[nextSong]
+        index.set([id, realLastSong, realNextSong, type, typeId]);
+        console.log(realLastSong, realNextSong);
+        return;
+      }
+      if (type == 'a-song') {
+        let album = $albums.find((a) => a.album == typeId);
+        if (album) {
+          id = album.ids.indexOf(id);
+          console.log(album.ids);
+          console.log("id:   " + id);
+        } else {
+          for (let i = 0; i < $albums.length; i++) {
+            if ($albums[i].album == typeId) {
+              id = $albums[i].ids.indexOf(id);
+            }
+          }
+        }
+        let lastSong = id - 1;
+        let nextSong = id + 1;
+
+        if (lastSong < 0) {
+          lastSong = album.ids.length - 1;
+        }
+        if (nextSong > album.ids.length - 1) {
+          nextSong = 0;
+        }
+        let realLastSong = album.ids[lastSong];
+        let realNextSong = album.ids[nextSong];
         index.set([id, realLastSong, realNextSong, type, typeId]);
         console.log(realLastSong, realNextSong);
         return;
