@@ -30,7 +30,6 @@
         audioComponent.$destroy();
         if ($index[3] == 'p-song') {
           playSong(song.fileName, $index[2], $index[3], $index[4]);
-          console.log($index);
           return;
         }
         if ($index[3] == 'a-song') {
@@ -60,7 +59,6 @@
         audioComponent.$destroy();
         if ($index[3] == 'p-song') {
           playSong(song.fileName, $index[0], $index[3], $index[4]);
-          console.log($index);
           return;
         }
         if ($index[3] == 'a-song') {
@@ -94,8 +92,6 @@
         let playlist = $playlists.find((p) => p.title == typeId);
         if (playlist) {
           id = playlist.songs.indexOf(id);
-          console.log(playlist.songs);
-          console.log("id:   " + id);
         } else {
           for (let i = 0; i < $playlists.length; i++) {
             if ($playlists[i].title == typeId) {
@@ -121,8 +117,6 @@
         let album = $albums.find((a) => a.album == typeId);
         if (album) {
           id = album.ids.indexOf(id);
-          console.log(album.ids);
-          console.log("id:   " + id);
         } else {
           for (let i = 0; i < $albums.length; i++) {
             if ($albums[i].album == typeId) {
@@ -172,7 +166,6 @@
     audio.set(url);
     await findSongIndexes(id, type, typeId);
     setCurrentlyPlaying(fileName);
-    console.log("ID stuff: " + id + " " + type + " " + typeId);
   }
 
   async function playExternalSong(fileName, location, id, type, typeId) {
@@ -228,7 +221,6 @@
           audioComponent.$destroy();
           if ($index[3] == 'p-song') {
           playSong(song.fileName, $index[2], $index[3], $index[4]);
-          console.log($index);
           return;
         }
         if ($index[3] == 'a-song') {
