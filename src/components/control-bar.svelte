@@ -68,6 +68,24 @@
         playSong(song.fileName, $index[1]);
       }
   }
+
+  if (browser) {
+    navigator.mediaSession.setActionHandler('previoustrack', function() {
+      back();
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', function() {
+      skip();
+    });
+
+    navigator.mediaSession.setActionHandler('play', function() {
+      pause();
+    });
+
+    navigator.mediaSession.setActionHandler('pause', function() {
+      pause();
+    });
+  }
   
   async function findSongIndexes(id, type, typeId) {
     if ($shufflePlaylist) {
@@ -165,7 +183,21 @@
     const url = URL.createObjectURL(file);
     audio.set(url);
     await findSongIndexes(id, type, typeId);
+    await navigatorMediaUpdate(id);
     setCurrentlyPlaying(fileName);
+  }
+
+  async function navigatorMediaUpdate(id) {
+    let song = findSongById(id)
+    console.log(song);
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title,
+      artist: song.artist,
+      album: song.album,
+      artwork: [
+        { src: song.albumArt, sizes: '512x512', type: 'image/jpeg' }
+      ]
+    });
   }
 
   async function playExternalSong(fileName, location, id, type, typeId) {
@@ -179,6 +211,7 @@
     const url = URL.createObjectURL(file);
     audio.set(url);
     await findSongIndexes(id, type, typeId);
+    await navigatorMediaUpdate(id);
     setCurrentlyPlaying(fileName);
   }
 
@@ -294,11 +327,23 @@
 
   {#if $currentlyPlaying != null}
     <div class="song_info">
+      <div class="flex">
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <!--<svg
+      on:click={console.log("real")}
+      class="play_hover2"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 -960 960 960"
+      ><path
+        d="M378.5-303 658-480 378.5-658v355ZM480.202-60q-87.109 0-163.755-32.847t-133.713-90.012q-57.067-57.166-89.9-133.539Q60-392.771 60-479.798q0-88.109 32.847-164.755t89.855-133.515q57.009-56.87 133.455-89.901Q392.604-901 479.714-901q88.193 0 164.963 33.085t133.559 89.803q56.789 56.717 89.777 133.268Q901-568.294 901-480.064q0 87.246-33.044 163.876-33.044 76.63-90.013 133.575-56.968 56.946-133.341 89.78Q568.229-60 480.202-60Z"
+      /></svg
+      >-->
       <img
         class="album_photo"
         src={$currentlyPlaying.albumArt}
         alt="album art"
       />
+    </div>
       <div class="song_md">
         <div class="song_title_vert">{$currentlyPlaying.title}</div>
         <div class="song_artist_vert">{$currentlyPlaying.artist}</div>
