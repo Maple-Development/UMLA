@@ -58,6 +58,15 @@
             return;
           }
         audioComponent.$destroy();
+        if ($index[3] == 'p-song') {
+          playSong(song.fileName, $index[0], $index[3], $index[4]);
+          console.log($index);
+          return;
+        }
+        if ($index[3] == 'a-song') {
+          playSong(song.fileName, $index[0], $index[3], $index[4]);
+          return;
+        }
         playSong(song.fileName, $index[1]);
       }
   }
@@ -217,6 +226,15 @@
         let song = findSongById($index[2])
         if (song) {
           audioComponent.$destroy();
+          if ($index[3] == 'p-song') {
+          playSong(song.fileName, $index[2], $index[3], $index[4]);
+          console.log($index);
+          return;
+        }
+        if ($index[3] == 'a-song') {
+          playSong(song.fileName, $index[2], $index[3], $index[4]);
+          return;
+        }
           if (location !== 'local' && location !== undefined) {
             playExternalSong(song.fileName, location, $index[2]);
             return;
