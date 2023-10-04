@@ -100,7 +100,16 @@
     const dataFolder = await d.getDirectoryHandle('umla.data', {
       create: true,
     });
-    return dataFolder;
+    const playlistFolder = await dataFolder.getDirectoryHandle(
+      'playlist.data',
+      {
+        create: true,
+      }
+    );
+    const playlistData = await playlistFolder.getFileHandle('playlist.md', {
+      create: true,
+    });
+    return dataFolder, playlistData;
   }
 
   async function saveSongPhoto(photo, title, count, handle) {

@@ -4,6 +4,7 @@
   import { playlists } from '$lib/store.js';
   import { songs } from '$lib/store.js';
   import { Label, Input, Helper, Button, Checkbox } from 'flowbite-svelte';
+  import { get, set } from 'idb-keyval';
   let createTitle;
   let createArt;
   let createSongs = [];
@@ -24,37 +25,79 @@
     playlistStage2 = false;
   };
 
-  async function createPlaylist() {
+async function createPlaylist() {
   const ids = createSongs.map((song) => song.id);
-  console.log(createArt);
 
-  // Filter out undefined albumArt values and limit to 4 songs
-  const songsWithArt = $songs
-    .filter((s) => ids.includes(s.id) && s.albumArt)
-    .slice(0, 4);
+// Filter out undefined albumArt values and limit to 4 songs
+const songsWithArt = $songs
+  .filter((s) => ids.includes(s.id) && s.albumArt)
+  .slice(0, 4);
 
-  // Create an array of albumArt values
-  const albumArtArray = songsWithArt.map((song) => song.albumArt);
+// Create an array of albumArt values
+const albumArtArray = songsWithArt.map((song) => song.albumArt);
 
-  if (createArt == '' || createArt == undefined) {
-    // Use the albumArtArray to generate and save the collage
-    if (albumArtArray.length > 3) {
-      createArt = await generateAndSaveCollage(...albumArtArray);
-    } else {
-      const song = $songs.find((s) => s.id == createSongs[0].id);
-      createArt = song.albumArt;
-    }
+if (createArt == '' || createArt == undefined) {
+  // Use the albumArtArray to generate and save the collage
+  if (albumArtArray.length > 3) {
+    createArt = await generateAndSaveCollage(...albumArtArray);
+  } else {
+    const song = $songs.find((s) => s.id == createSongs[0].id);
+    createArt = song.albumArt;
   }
+}
 
-  const playlist = {
-    title: createTitle,
-    playlistArt: createArt,
-    songs: ids,
-  };
+const playlist = {
+  title: createTitle,
+  songs: ids,
+};
 
-  playlists.update((p) => [...p, playlist]);
-  console.log($playlists);
+
+  let d;
+  const fileHandleOrUndefined = await get('file');
+    if (fileHandleOrUndefined) {
+      d = fileHandleOrUndefined;
+    } else {
+      d = await window.showDirectoryPicker();
+      await set('file', d);
+    }
+  const f = await d.getDirectoryHandle('umla.data');
+  const pdir = await f.getDirectoryHandle('playlist.data');
+  const p = await pdir.getFileHandle('playlist.md');
+  const pd = await f.getDirectoryHandle('playlist.data');
+  let allPlaylists = await pushPlaylists(pdir, playlist);
+  let artNum = allPlaylists.length;
+  createPlaylistArt(pd, artNum, createArt);
+  const pfile = await p.createWritable();
+  await pfile.write(JSON.stringify(allPlaylists));
+  await pfile.close();
   reset();
+}
+
+async function pushPlaylists(handle, playlist) {
+  const playlistFilePath = 'playlist.md';
+
+// Read the current playlist file
+const file = await handle.getFileHandle(playlistFilePath);
+const contents = await file.getFile();
+const currentPlaylistsData = await contents.text();
+let currentPlaylists;
+if (currentPlaylistsData) {
+  currentPlaylists = JSON.parse(currentPlaylistsData);
+} else {
+  currentPlaylists = [];
+}
+
+// Add the new playlist to the current playlists
+currentPlaylists.push(playlist);
+return currentPlaylists; 
+}
+
+async function createPlaylistArt(handle, num, photo) {
+    let title = num + '.umla';
+    const cm = await handle.getFileHandle(title, { create: true });
+    const cmf = await cm.createWritable();
+    await cmf.write(photo);
+    await cmf.close();
 }
 
 

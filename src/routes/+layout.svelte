@@ -11,7 +11,7 @@
   import { get, set } from 'idb-keyval';
   import { songs } from '$lib/store.js';
   import { albums } from '$lib/store.js';
-  import { libLocation, artists } from '$lib/store.js';
+  import { libLocation, artists, playlists } from '$lib/store.js';
 
   $: location = $libLocation;
 
@@ -61,6 +61,7 @@
     await setLibrarySongs($handle);
     await setAlbumSongs();
     await setArtists();
+    await loadPlaylists($handle);
     closeModal();
   }
 
@@ -72,6 +73,37 @@
     const json = JSON.parse(contents);
     let songData = await getSongImages(handles, json.songMd);
     songs.set(songData);
+  }
+
+  async function loadPlaylists(handle) {
+    const d = await handle.getDirectoryHandle('umla.data');
+    const pdir = await d.getDirectoryHandle('playlist.data');
+    const p = await pdir.getFileHandle('playlist.md');
+    const file = await p.getFile();
+    const contents = await file.text();
+    if (contents) {
+    const json = JSON.parse(contents);
+    let playlistData = await loadPlaylistImages(pdir, json);
+    console.log(playlistData);
+    playlists.set(playlistData);
+    } else {
+      playlists.set([]);
+    }
+  }
+
+  async function loadPlaylistImages(handle, json) {
+    const playlists = json;
+    let f = 0;
+    for (let i = 0; i < playlists.length; i++) {
+      f++;
+      const playlist = playlists[i];
+      const artHandle = await handle.getFileHandle(f + '.umla');
+      const file = await artHandle.getFile();
+      const contents = await file.text();
+      const image = contents;
+      playlist.playlistArt = image;
+    }
+    return playlists;
   }
 
   async function setAlbumSongs() {
