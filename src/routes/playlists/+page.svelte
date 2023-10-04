@@ -2,7 +2,7 @@
   import LargeSongCard from '../../components/large-song-card.svelte';
   import MiniSongCard from '../../components/mini-song-card.svelte';
   import { playlists } from '$lib/store.js';
-  import { songs } from '$lib/store.js';
+  import { songs, libLocation } from '$lib/store.js';
   import { Label, Input, Helper, Button, Checkbox } from 'flowbite-svelte';
   import { get, set } from 'idb-keyval';
   let createTitle;
@@ -48,8 +48,37 @@ if (createArt == '' || createArt == undefined) {
 
 const playlist = {
   title: createTitle,
-  songs: ids,
+  sources: [
+    {
+      location: 'local',
+      songs: [],
+    },
+    {
+      location: $libLocation,
+      songs: [],
+    },
+  ],
 };
+const sourcesByLocation = {};
+
+for (let i = 0; i < createSongs.length; i++) {
+  const location = createSongs[i].location;
+  const songId = createSongs[i].id;
+
+  if (!sourcesByLocation[location]) {
+    sourcesByLocation[location] = {
+      location: location,
+      songs: [],
+    };
+  }
+
+  sourcesByLocation[location].songs.push(songId);
+}
+
+const sources = Object.values(sourcesByLocation);
+playlist.sources = sources;
+
+console.log(playlist);
 
 
   let d;

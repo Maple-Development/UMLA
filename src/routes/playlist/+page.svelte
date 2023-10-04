@@ -8,26 +8,36 @@
     let params = new URLSearchParams(document.location.search);
     playlistName = params.get('playlist');
   }
-  let playlistSongs = [];
-  let showSongs = [];
-  let playlistInfo = [];
-  let playlistId;
+let playlistSongs = [];
+let showSongs = [];
+let playlistInfo = [];
+let playlistId;
 
-  $: {
-    showSongs = [];
-    $playlists.forEach((playlist) => {
-      if (playlist.title === playlistName) {
-        playlistId = playlist.title;
-        playlistInfo = playlist;
-        playlistSongs = playlist.songs;
-        $songs.forEach((song) => {
-          if (playlistSongs.includes(song.id)) {
-            showSongs.push(song);
-          }
+$: {
+  showSongs = [];
+  $playlists.forEach((playlist) => {
+    playlist.sources.forEach((source) => {
+      playlistSongs = playlistSongs.concat(source.songs);
+    });
+    playlist.songs = playlistSongs;
+    $songs.forEach((song) => {
+      const isSongIncluded = showSongs.some((showSong) => showSong.id === song.id);
+      if (!isSongIncluded && playlistSongs.includes(song.id)) {
+        showSongs.push({
+          ...song,
         });
       }
     });
+    if (playlist.title === playlistName) {
+      playlistId = playlist.title;
+      playlistInfo = playlist;
+    }
+    playlistSongs = []; // Reset playlistSongs for the next iteration
+  });
+  if (browser) {
+    console.log(showSongs);
   }
+}
 </script>
 
 {#if playlistName}
@@ -45,7 +55,7 @@
     <div class="top-track">
       <div style="display: flex;"><h1 class="track-text ml-14">#</h1> <h1 class="track-text ml-4">Title</h1></div> <h1 style="margin-right: 80px;" class="track-text">O</h1>
     </div>
-    {#each showSongs as song, i (song.id)}
+    {#each showSongs as song, i (i)}
     <div class="flex ml-8 items-center hov-container">
       <div class="mr-4 ml-4">
         <h1 style="text-align: right;" class="track-text w-6">{i + 1}</h1>
@@ -59,8 +69,8 @@
         id={song.id}
         typeId={playlistId}
       />
-      </div>
-    {/each}
+    </div>
+  {/each}
   </div>
 </div>
 {:else}
