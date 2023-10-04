@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { loadScript } from './document.js';
   import FakeCard from '../../components/fake-card.svelte';
-  import { libLocation } from '$lib/store.js';
+  import { libLocation, songs } from '$lib/store.js';
 
   $: location = $libLocation;
   import {
@@ -126,6 +126,34 @@
     working2 = false;
     working = false;
   }
+
+  async function addExistingLibrary() {
+    working2 = true;
+    const blobsInDirectory = await directoryOpen({
+      recursive: true,
+    });
+    let d;
+    const fileHandleOrUndefined = await get('file');
+    if (fileHandleOrUndefined) {
+      d = fileHandleOrUndefined;
+    } else {
+      d = await window.showDirectoryPicker();
+      await set('file', d);
+    }
+    const f = await d.getDirectoryHandle('umla.data');
+    const file = await f.getFileHandle('songMd.json');
+    const fileBlob = await file.getFile();
+    const jsonData = await fileBlob.text();
+    const json = JSON.parse(jsonData);
+    songs.set(json.songMd);
+    progressBarLength = json.songMd.length;
+    progressBar2Length = json.songMd.length;
+    for (let i = 0; i < json.songMd.length; i++) {
+      current++;
+    }
+    working2 = false;
+    working = false;
+  }
 </script>
 
 {#if location == 'local' || location == undefined}
@@ -134,6 +162,7 @@
       <div class="welcome2">
         {#if working == true}
           <button on:click={addSong}> Upload Songs! </button>
+          <button on:click={addExistingLibrary}> Use Existing Library!</button>
           <div class="flex">
             <div>
               <h1>{current} / {progressBarLength}</h1>
