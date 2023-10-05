@@ -26,6 +26,9 @@
 
   async function startModal() {
     if ((await get('file')) === undefined) {
+      if (window.location.pathname === '/settings') {
+        return;
+      }
       if (window.location.pathname !== '/upload') {
         window.location.href = '/upload';
         return;
@@ -33,10 +36,13 @@
         return;
       }
     }
-    if (location !== 'local' && location !== undefined) {
-      loadExternalLibrary();
-      return;
-    }
+    if (window.location.pathname === '/settings') {
+        return;
+      }
+      if (location !== 'local' && location !== undefined) {
+        loadExternalLibrary();
+        return;
+      }
     if (window.location.pathname === '/upload') {
         return;
     }
@@ -156,6 +162,28 @@
     artists.set(Object.values(artistsMap));
   }
 
+  async function loadExternalPlaylists() {  
+        const response = await fetch(location + '/umla.data/playlist.data/playlist.md');
+        const json = await response.json();
+        let playlistData = await loadExternalPlaylistImages(json);
+        playlists.set(playlistData);
+  }
+
+  async function loadExternalPlaylistImages(json) {
+    const playlists = json;
+    let f = 0;
+    for (let i = 0; i < playlists.length; i++) {
+      f++;
+      const playlist = playlists[i];
+      const artHandle = await fetch(location + '/umla.data/playlist.data/' + f + '.umla');
+      const file = await artHandle.text();
+      const contents = file;
+      const image = contents;
+      playlist.playlistArt = image;
+    }
+    return playlists;
+  }
+
   async function loadExternalLibrary() {
     const response = await fetch(location + '/umla.data/songMd.json');
     const json = await response.json();
@@ -163,6 +191,7 @@
     songs.set(songData);
     await setAlbumSongs();
     await setArtists();
+    await loadExternalPlaylists();
   }
 
   async function getExternalSongImages(location, json) {
