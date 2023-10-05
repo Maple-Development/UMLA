@@ -4,11 +4,19 @@
 
   let value;
   let css;
+  var libArray = [];
+  $: location = libArray.push($libLocation);
   const submit = () => {
     const linkRegex = /\/$/;
     const modifiedValue = value.replace(linkRegex, ''); // Removes trailing /
 
-    libLocation.set(modifiedValue);
+    // Add new location to $libLocation array
+    if (location) {
+      libArray.push(modifiedValue);
+      libLocation.set(libArray);
+    } else {
+      libLocation.set(modifiedValue);
+    }
     window.location.reload();
   };
 
@@ -16,6 +24,8 @@
     libLocation.set('local');
     window.location.reload();
   };
+
+  
 
 const submitTheme = () => {
   const reader = new FileReader();
@@ -59,7 +69,7 @@ const submitTheme = () => {
   <h1 class="favorites_header">Custom Location</h1>
 <form id="set-location" on:submit={submit} on:reset={reset}>
   <Label class="space-y-2 flex flex-col pb-3">
-    <span class="text-xl" style="color: var(--md-sys-color-on-surface);">Add a Song Location</span>
+    <span class="text-xl" style="color: var(--md-sys-color-on-surface);">Add a new Song Location</span>
     <Input
       bind:value
       class="w-3/4"
@@ -68,6 +78,12 @@ const submitTheme = () => {
       size="md"
     />
   </Label>
+  <span class="text-xl" style="color: var(--md-sys-color-on-surface);">Current Locations Added:</span>
+  <br>
+  {#each libArray as location}
+  <span class="text-sm" style="color: var(--md-sys-color-primary);">{location}</span>
+  {/each}
+  <br>
   <Button class="w-24" type="submit">Submit</Button>
   <Button class="w-24" type="reset">Reset</Button>
 </form>

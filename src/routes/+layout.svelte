@@ -26,6 +26,13 @@
 
   async function startModal() {
     if ((await get('file')) === undefined) {
+      if (window.location.pathname === '/settings') {
+        return;
+      }
+      if (location !== 'local' && location !== undefined) {
+        loadExternalLibrary();
+        return;
+      }
       if (window.location.pathname !== '/upload') {
         window.location.href = '/upload';
         return;
@@ -33,11 +40,11 @@
         return;
       }
     }
-    if (location !== 'local' && location !== undefined) {
-      loadExternalLibrary();
-      return;
-    }
     if (window.location.pathname === '/upload') {
+        return;
+    }
+    if (location !== 'local' && location !== undefined) {
+        loadExternalLibrary();
         return;
     }
     modal = true;
@@ -72,7 +79,11 @@
     const contents = await file.text();
     const json = JSON.parse(contents);
     let songData = await getSongImages(handles, json.songMd);
-    songs.set(songData);
+    if (location.constructor == Array) {
+    songs.set([...$songs, songData]);
+    } else {
+      songs.set(songData);
+    }
   }
 
   async function loadPlaylists(handle) {
@@ -85,13 +96,53 @@
     const json = JSON.parse(contents);
     let playlistData = await loadPlaylistImages(pdir, json);
     console.log(playlistData);
-    playlists.set(playlistData);
+    if (location.constructor == Array) {
+        playlists.set([...$playlists, playlistData]);
+    } else {
+        playlists.set(playlistData);
+    }
+
     } else {
       playlists.set([]);
     }
   }
 
-  async function loadPlaylistImages(handle, json) {
+  async function loadExternalPlaylists() {
+    let locationArray = [];
+      location.forEach((l) => {
+        locationArray.push(l + '/umla.data/songMd.json');
+    });
+      for (let i = 0; i < locationArray.length; i++) {
+        
+        const response = await fetch(location + '/umla.data/playlist.data/playlist.md');
+        const json = await response.json();
+        let playlistData = await loadExternalPlaylistImages(json);
+        // Push the playlist data to the playlists store
+        if (location.constructor == Array) {
+          playlists.set([...$playlists, playlistData]);
+        } else {
+          playlists.set(playlistData);
+        } 
+      }
+  }
+
+  async function loadExternalPlaylistImages(json) {
+    const playlists = json;
+    let f = 0;
+    for (let i = 0; i < playlists.length; i++) {
+      f++;
+      const playlist = playlists[i];
+      const artHandle = await fetch(location + '/umla.data/playlist.data/' + f + '.umla');
+      const file = await artHandle.text();
+      const contents = file;
+      const image = contents;
+      playlist.playlistArt = image;
+    }
+    return playlists;
+  }
+
+
+  async function loadPlaylistImages(json) {
     const playlists = json;
     let f = 0;
     for (let i = 0; i < playlists.length; i++) {
@@ -133,9 +184,12 @@
       albumMap[album].ids.push(song.id);
     });
 
-    albums.set(
-      Object.values(albumMap).filter((album) => album.tracks.length > 1),
-    );
+    if (location.constructor == Array) {
+      albums.set(...$albums, Object.values(albumMap).filter((album) => album.tracks.length > 1),);
+    } else {
+      albums.set(Object.values(albumMap).filter((album) => album.tracks.length > 1));
+    }
+    
   }
 
   async function setArtists() {
@@ -152,17 +206,43 @@
       }
       artistsMap[artist].ids.push(song.id);
     });
-
-    artists.set(Object.values(artistsMap));
+    if (location.constructor == Array) {
+      artists.set([...$artists, Object.values(artistsMap)]);
+    } else {
+      artists.set(Object.values(artistsMap));
+    }
   }
 
   async function loadExternalLibrary() {
+    if (location.constructor == Array) {
+      let locationArray = [];
+      location.forEach((l) => {
+        locationArray.push(l + '/umla.data/songMd.json');
+      })
+        for (let i = 0; i < locationArray.length; i++) {
+          if (locationArray[i] !== "local/umla.data/songMd.json") {
+            const response = await fetch(locationArray[i]);
+            const json = await response.json();
+            songs.set([...$songs, json.songMd]);
+          } 
+        }
+        await setAlbumSongs();
+        await setArtists();
+        await loadExternalPlaylists();
+        return;
+    }
     const response = await fetch(location + '/umla.data/songMd.json');
     const json = await response.json();
     let songData = await getExternalSongImages(location, json.songMd);
-    songs.set(songData);
+    if (location.constructor == Array) {
+      songs.set([...$songs, songData]);
+    } else {
+      songs.set(songData);
+    }
+    console.log(location);
     await setAlbumSongs();
     await setArtists();
+    await loadExternalPlaylists();
   }
 
   async function getExternalSongImages(location, json) {
