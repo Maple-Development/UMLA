@@ -113,37 +113,44 @@
   }
 
   async function setAlbumSongs() {
-    const albumMap = {};
+  const albumMap = {};
 
-    $songs.forEach((song) => {
-      const album = song.album;
-      const artist = song.artist;
-      const track = song.track;
-      const albumArt = song.albumArt;
+  $songs.forEach((song) => {
+    const album = song.album;
+    const artist = song.artist;
+    const track = song.track;
+    const albumArt = song.albumArt;
 
-      if (!(album in albumMap)) {
-        albumMap[album] = {
-          album,
-          artist,
-          albumArt,
-          tracks: [],
-          ids: [],
-        };
-      }
-
-      albumMap[album].tracks.push({
-        track,
+    if (!(album in albumMap)) {
+      albumMap[album] = {
+        album,
+        artist,
         albumArt,
-      });
+        tracks: [],
+        ids: [],
+      };
+    }
 
-      albumMap[album].ids.push(song.id);
+    // Extract the track number from the "num/totaltracks" format
+    const trackNumber = parseInt(track.split('/')[0]);
+
+    albumMap[album].tracks.push({
+      track: trackNumber,
+      albumArt,
     });
 
-    albums.set(
-      Object.values(albumMap).filter((album) => album.tracks.length > 1),
-    );
-  }
+    albumMap[album].ids.push(song.id);
+  });
 
+  // Sort the tracks within each album by track number
+  Object.values(albumMap).forEach((album) => {
+    album.tracks.sort((a, b) => a.track - b.track);
+  });
+
+  albums.set(
+    Object.values(albumMap).filter((album) => album.tracks.length > 1),
+  );
+}
   async function setArtists() {
     const artistsMap = {};
 

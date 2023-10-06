@@ -8,26 +8,30 @@
       let params = new URLSearchParams(document.location.search);
       albumName = params.get('album');
     }
-    let albumSongs = [];
-    let showSongs = [];
-    let albumInfo = [];
-    let albumId;
-  
-    $: {
-      showSongs = [];
-      $albums.forEach((album) => {
-        if (album.album === albumName) {
-          albumId = album.album;
-          albumInfo = album;
-          albumSongs = album.ids;
-          $songs.forEach((song) => {
-            if (albumSongs.includes(song.id)) {
-              showSongs.push(song);
-            }
-          });
-        }
-      });
+let albumSongs = [];
+let showSongs = [];
+let albumInfo = [];
+let albumId;
+
+$: {
+  showSongs = [];
+  $albums.forEach((album) => {
+    if (album.album === albumName) {
+      albumId = album.album;
+      albumInfo = album;
+      albumSongs = album.ids;
+
+      // Filter and sort songs by track number
+      showSongs = $songs
+        .filter((song) => albumSongs.includes(song.id))
+        .sort((a, b) => {
+          const trackA = parseInt(a.track.split('/')[0]);
+          const trackB = parseInt(b.track.split('/')[0]);
+          return trackA - trackB;
+        });
     }
+  });
+}
   </script>
   
   {#if albumName}
