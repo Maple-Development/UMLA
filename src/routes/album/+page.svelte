@@ -47,7 +47,7 @@ $: {
   <div class="favorites-alt">
     <div class="outer-track">
       <div class="top-track">
-        <div style="display: flex;"><h1 class="track-text ml-14">#</h1> <h1 class="track-text ml-4">Title</h1></div> <h1 style="margin-right: 80px;" class="track-text">O</h1>
+        <div style="display: flex;"><h1 class="track-text ml-14">#</h1> <h1 class="track-text ml-4">Title</h1></div> <h1 style="margin-right: 80px;" class="track-text">|</h1>
       </div>
       {#each showSongs as song, i (song.id)}
       <div class="flex ml-8 items-center hov-container">
