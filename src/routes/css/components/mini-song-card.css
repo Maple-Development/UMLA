@@ -1,0 +1,43 @@
+.mini-card {
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  height: max-content;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 10px;
+  background: transparent;
+  transition: background .1s;
+  overflow: hidden;
+}
+
+.mini-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mini-card .song_title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mini-card .song_artist {
+  color: #aaa;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mini-card .img_container {
+  flex-shrink: 0;
+}
+
+.mini-card .text-container {
+  flex: 1;
+}
+
+.mini-card .album_art {
+  height: 45px;
+  border-radius: 5px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+}

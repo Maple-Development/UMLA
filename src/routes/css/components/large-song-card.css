@@ -1,0 +1,33 @@
+.large-card {
+  width: 200px;
+  background: transparent;
+  transition: background .1s;
+  overflow: hidden;
+}
+
+.large-card .album_art {
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.large-card .song_title {
+  padding: 10px;
+  padding-bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.large-card .song_artist {
+  padding: 10px;
+  padding-top: 0;
+  color: #aaa;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.large-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
