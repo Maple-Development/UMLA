@@ -8,7 +8,6 @@
     export let fileName;
     export let id;
     export let typeId;
-    import '../routes/css/components/track.css';
   
     $: location = $libLocation;
   
@@ -66,7 +65,6 @@
         </div>
         {/if}
     <div>
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <h1 on:click={handlePlay(fileName, title, id)} class="song_title-alt">{title}</h1>
         <h2 class="song_artist-alt">{artist}</h2>
     </div>

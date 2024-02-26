@@ -3,6 +3,7 @@
   let title = 'UMLA';
   import NavBar from '../components/nav-bar.svelte';
   import ControlBar from '../components/control-bar.svelte';
+  import FakeCard from '../components/fake-card.svelte';
   import './css/app.css';
   import './css/bottom-bar.css';
   import { afterNavigate } from '$app/navigation';
@@ -29,7 +30,7 @@
         return;
       }
       if (window.location.pathname !== '/upload') {
-        //window.location.href = '/upload'; Uncomment to enable upload redirect
+        window.location.href = '/upload';
         return;
       } else if (window.location.pathname === '/upload') {
         return;
@@ -45,7 +46,7 @@
     if (window.location.pathname === '/upload') {
         return;
     }
-    modal = false;  // Set to true to enable library refresh checking
+    modal = true;
   }
 
   async function closeModal() {
@@ -248,6 +249,7 @@
   <title>{title}</title>
 </head>
 
+<NavBar />
 <slot />
 {#if modal == true}
   <div class="welcome4">
@@ -259,6 +261,11 @@
       </p>
       <button on:click={checkStatus}>Refresh Library</button>
     </div>
+  </div>
+  <div class="blur">
+    <FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard
+    /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard
+    /><FakeCard /><FakeCard /><FakeCard /><FakeCard />
   </div>
 {/if}
 <br /><br /><br /><br />

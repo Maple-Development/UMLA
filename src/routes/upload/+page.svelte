@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { loadScript } from './document.js';
+  import FakeCard from '../../components/fake-card.svelte';
   import { libLocation, songs } from '$lib/store.js';
 
   $: location = $libLocation;
@@ -229,6 +230,11 @@
     </div>
   </div>
 {/if}
+<div class="blur">
+  <FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard
+  /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard /><FakeCard
+  /><FakeCard /><FakeCard /><FakeCard /><FakeCard />
+</div>
 
 <style>
   .welcome {

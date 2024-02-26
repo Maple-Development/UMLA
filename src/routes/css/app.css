@@ -2,10 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 @import url('material/theme.css');
 
-* {
-  box-sizing: border-box;
-}
-
 html {
   overflow: scroll;
   overflow-x: hidden;
@@ -21,8 +17,9 @@ html {
 }
 body {
   margin: 0;
-  background-color: black;
-  color: white;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  text-align: center;
 }
 
 #nav-move {
@@ -340,12 +337,16 @@ body {
   margin-left: 2vw;
 }
 
+.outer-card .img_container img {
+  margin-top: 3vh;
+  margin-left: 3vh;
+  margin-right: 3vh;
+}
+
 .card_vert {
   display: flex;
   flex-direction: column;
 }
-
-/*
 
 .song_title {
   font-family: Ubuntu;
@@ -369,7 +370,7 @@ body {
   font-size: 1.5vh;
   text-overflow: ellipsis;
   width: 200px;
-}*/
+}
 
 .img_container {
   position: relative;
@@ -388,7 +389,7 @@ body {
     opacity 0.5s linear;
   fill: #3dba93;
 }
-/*
+
 .album_art {
   height: 200px;
   width: 200px;
@@ -403,7 +404,7 @@ body {
   opacity: 1;
   fill: #3dba93;
   transition: fill 100ms linear;
-}*/
+}
 
 .play_hover:hover {
   visibility: visible;
